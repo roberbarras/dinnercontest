@@ -6,7 +6,10 @@ create table users
     user_name   varchar,
     access_name varchar not null,
     creation_date timestamp,
-    email varchar
+    last_login timestamp,
+    email varchar,
+    local_privacy int,
+    global_privacy int
 );
 
 alter table users

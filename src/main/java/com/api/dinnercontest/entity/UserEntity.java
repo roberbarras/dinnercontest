@@ -12,6 +12,8 @@ public class UserEntity {
 
     private LocalDateTime creationDate;
 
+    private LocalDateTime lastLogin;
+
     private String email;
 
     public String getUserName() {
@@ -46,13 +48,21 @@ public class UserEntity {
         this.email = email;
     }
 
+    public LocalDateTime getLastLogin() {
+        return lastLogin;
+    }
+
+    public void setLastLogin(LocalDateTime lastLogin) {
+        this.lastLogin = lastLogin;
+    }
+
     @Override
     public String toString() {
         return "UserEntity{" +
-                "userId=" + userId +
-                ", userName='" + userName + '\'' +
+                "userName='" + userName + '\'' +
                 ", accessName='" + accessName + '\'' +
                 ", creationDate=" + creationDate +
+                ", lastLogin=" + lastLogin +
                 ", email='" + email + '\'' +
                 '}';
     }

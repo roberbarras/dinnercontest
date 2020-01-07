@@ -35,10 +35,11 @@ public class UserRepository {
             user.setAccessName(rs.getString("access_name"));
             user.setCreationDate(rs.getTimestamp("creation_date").toLocalDateTime());
             user.setEmail(rs.getString("email"));
+            user.setLastLogin(rs.getTimestamp("last_login").toLocalDateTime());
             return user;
         };
 
-        String sql = "select u.user_name, u.access_name, u.creation_date, u.email " +
+        String sql = "select u.user_name, u.access_name, u.creation_date, u.email, u.last_login " +
                 "from users u where u.user_id = :id " +
                 "limit 1";
 
@@ -58,9 +59,10 @@ public class UserRepository {
         parameters.addValue("access", userEntity.getAccessName());
         parameters.addValue("creation", LocalDateTime.now());
         parameters.addValue("email", userEntity.getEmail());
+        parameters.addValue("last_login", LocalDateTime.of(2000, 1, 1, 0, 0));
 
-        String sql = "insert into users (user_name, access_name, creation_date, email) " +
-                "values (:name, :access, :creation, :email)";
+        String sql = "insert into users (user_name, access_name, creation_date, email, last_login) " +
+                "values (:name, :access, :creation, :email, :last_login)";
 
         int saved = jdbcTemplate.update(sql, parameters);
 

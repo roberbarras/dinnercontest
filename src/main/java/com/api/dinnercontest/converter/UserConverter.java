@@ -11,6 +11,7 @@ public class UserConverter {
         userModel.setAccessName(userEntity.getAccessName());
         userModel.setCreationDate(userEntity.getCreationDate());
         userModel.setEmail(userEntity.getEmail());
+        userModel.setLastLogin(userEntity.getLastLogin());
         return userModel;
     }
 
@@ -20,6 +21,7 @@ public class UserConverter {
         userEntity.setAccessName(userModel.getAccessName());
         userEntity.setCreationDate(userModel.getCreationDate());
         userEntity.setEmail(userModel.getEmail());
+        userEntity.setLastLogin(userModel.getLastLogin());
         return userEntity;
     }
 }
