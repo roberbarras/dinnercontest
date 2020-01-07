@@ -12,6 +12,8 @@ public class UserEntity {
 
     private LocalDateTime creationDate;
 
+    private String email;
+
     public String getUserName() {
         return userName;
     }
@@ -36,6 +38,14 @@ public class UserEntity {
         this.creationDate = creationDate;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "UserEntity{" +
@@ -43,6 +53,7 @@ public class UserEntity {
                 ", userName='" + userName + '\'' +
                 ", accessName='" + accessName + '\'' +
                 ", creationDate=" + creationDate +
+                ", email='" + email + '\'' +
                 '}';
     }
 }

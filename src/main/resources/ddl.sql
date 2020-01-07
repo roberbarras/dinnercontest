@@ -5,7 +5,8 @@ create table users
             primary key,
     user_name   varchar,
     access_name varchar not null,
-    creation_date timestamp
+    creation_date timestamp,
+    email varchar
 );
 
 alter table users

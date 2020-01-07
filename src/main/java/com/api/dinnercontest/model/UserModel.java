@@ -10,6 +10,8 @@ public class UserModel {
 
     private LocalDateTime creationDate;
 
+    private String email;
+
     public UserModel() {
     }
 
@@ -37,12 +39,21 @@ public class UserModel {
         this.creationDate = creationDate;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "UserModel{" +
                 "userName='" + userName + '\'' +
                 ", accessName='" + accessName + '\'' +
                 ", creationDate=" + creationDate +
+                ", email='" + email + '\'' +
                 '}';
     }
 }
