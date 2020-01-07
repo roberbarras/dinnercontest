@@ -14,6 +14,10 @@ public class UserModel {
 
     private String email;
 
+    private int localPrivacy;
+
+    private int globalPrivacy;
+
     public UserModel() {
     }
 
@@ -57,6 +61,22 @@ public class UserModel {
         this.lastLogin = lastLogin;
     }
 
+    public int getLocalPrivacy() {
+        return localPrivacy;
+    }
+
+    public void setLocalPrivacy(int localPrivacy) {
+        this.localPrivacy = localPrivacy;
+    }
+
+    public int getGlobalPrivacy() {
+        return globalPrivacy;
+    }
+
+    public void setGlobalPrivacy(int globalPrivacy) {
+        this.globalPrivacy = globalPrivacy;
+    }
+
     @Override
     public String toString() {
         return "UserModel{" +
@@ -65,6 +85,8 @@ public class UserModel {
                 ", creationDate=" + creationDate +
                 ", lastLogin=" + lastLogin +
                 ", email='" + email + '\'' +
+                ", localPrivacy=" + localPrivacy +
+                ", globalPrivacy=" + globalPrivacy +
                 '}';
     }
 }

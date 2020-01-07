@@ -16,6 +16,10 @@ public class UserEntity {
 
     private String email;
 
+    private int localPrivacy;
+
+    private int globalPrivacy;
+
     public String getUserName() {
         return userName;
     }
@@ -56,6 +60,22 @@ public class UserEntity {
         this.lastLogin = lastLogin;
     }
 
+    public int getLocalPrivacy() {
+        return localPrivacy;
+    }
+
+    public void setLocalPrivacy(int localPrivacy) {
+        this.localPrivacy = localPrivacy;
+    }
+
+    public int getGlobalPrivacy() {
+        return globalPrivacy;
+    }
+
+    public void setGlobalPrivacy(int globalPrivacy) {
+        this.globalPrivacy = globalPrivacy;
+    }
+
     @Override
     public String toString() {
         return "UserEntity{" +
@@ -64,6 +84,8 @@ public class UserEntity {
                 ", creationDate=" + creationDate +
                 ", lastLogin=" + lastLogin +
                 ", email='" + email + '\'' +
+                ", localPrivacy=" + localPrivacy +
+                ", globalPrivacy=" + globalPrivacy +
                 '}';
     }
 }
