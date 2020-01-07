@@ -1,5 +1,7 @@
 package com.api.dinnercontest.entity;
 
+import java.time.LocalDateTime;
+
 public class UserEntity {
 
     private Long userId;
@@ -7,6 +9,8 @@ public class UserEntity {
     private String userName;
 
     private String accessName;
+
+    private LocalDateTime creationDate;
 
     public String getUserName() {
         return userName;
@@ -24,12 +28,21 @@ public class UserEntity {
         this.accessName = accessName;
     }
 
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+
     @Override
     public String toString() {
         return "UserEntity{" +
                 "userId=" + userId +
                 ", userName='" + userName + '\'' +
                 ", accessName='" + accessName + '\'' +
+                ", creationDate=" + creationDate +
                 '}';
     }
 }

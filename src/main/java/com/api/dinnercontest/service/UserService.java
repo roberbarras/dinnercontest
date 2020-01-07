@@ -18,7 +18,7 @@ public class UserService {
     }
 
     public void save(UserModel userModel) {
-        userRepository.save(userModel);
+        userRepository.save(UserConverter.toEntity(userModel));
     }
 
     public void joinGroup(UserGroupModel userGroupModel) {

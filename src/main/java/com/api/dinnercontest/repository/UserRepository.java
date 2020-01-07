@@ -2,13 +2,14 @@ package com.api.dinnercontest.repository;
 
 import com.api.dinnercontest.entity.UserEntity;
 import com.api.dinnercontest.model.UserGroupModel;
-import com.api.dinnercontest.model.UserModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.time.LocalDateTime;
 
 @Slf4j
 @Repository
@@ -32,10 +33,11 @@ public class UserRepository {
             UserEntity user = new UserEntity();
             user.setUserName(rs.getString("user_name"));
             user.setAccessName(rs.getString("access_name"));
+            user.setCreationDate(rs.getTimestamp("creation_date").toLocalDateTime());
             return user;
         };
 
-        String sql = "select users.user_name, users.access_name from users where user_id = :id limit 1";
+        String sql = "select users.user_name, users.access_name, users.creation_date from users where user_id = :id limit 1";
 
         UserEntity user = this.jdbcTemplate.query(sql, parameters, mapper).get(0);
 
@@ -44,15 +46,16 @@ public class UserRepository {
         return user;
     }
 
-    public void save(UserModel userModel) {
+    public void save(UserEntity userEntity) {
 
         //log.info("Start save user with name {}", name);
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
-        parameters.addValue("name", userModel.getUserName());
-        parameters.addValue("access", userModel.getAccessName());
+        parameters.addValue("name", userEntity.getUserName());
+        parameters.addValue("access", userEntity.getAccessName());
+        parameters.addValue("creation", LocalDateTime.now());
 
-        String sql = "insert into users (user_name, access_name) values (:name, :access)";
+        String sql = "insert into users (user_name, access_name, creation_date) values (:name, :access, :creation)";
 
         int saved = jdbcTemplate.update(sql, parameters);
 

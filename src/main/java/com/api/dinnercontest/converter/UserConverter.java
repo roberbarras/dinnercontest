@@ -9,6 +9,7 @@ public class UserConverter {
         UserModel userModel = new UserModel();
         userModel.setUserName(userEntity.getUserName());
         userModel.setAccessName(userEntity.getAccessName());
+        userModel.setCreationDate(userEntity.getCreationDate());
         return userModel;
     }
 
@@ -16,6 +17,7 @@ public class UserConverter {
         UserEntity userEntity = new UserEntity();
         userEntity.setUserName(userModel.getUserName());
         userEntity.setAccessName(userModel.getAccessName());
+        userEntity.setCreationDate(userModel.getCreationDate());
         return userEntity;
     }
 }
