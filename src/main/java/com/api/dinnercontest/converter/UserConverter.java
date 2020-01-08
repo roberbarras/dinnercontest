@@ -14,6 +14,7 @@ public class UserConverter {
         userModel.setLastLogin(userEntity.getLastLogin());
         userModel.setLocalPrivacy(userEntity.getLocalPrivacy());
         userModel.setGlobalPrivacy(userEntity.getGlobalPrivacy());
+        userModel.setPassword(userEntity.getPassword());
         return userModel;
     }
 
@@ -26,6 +27,7 @@ public class UserConverter {
         userEntity.setLastLogin(userModel.getLastLogin());
         userEntity.setLocalPrivacy(userModel.getLocalPrivacy());
         userEntity.setGlobalPrivacy(userModel.getGlobalPrivacy());
+        userEntity.setPassword(userModel.getPassword());
         return userEntity;
     }
 }

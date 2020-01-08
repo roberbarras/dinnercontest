@@ -64,10 +64,11 @@ public class UserRepository {
         parameters.addValue("last_login", LocalDateTime.of(2000, 1, 1, 0, 0));
         parameters.addValue("local_privacy", 0);
         parameters.addValue("global_privacy", 0);
+        parameters.addValue("password", userEntity.getPassword());
 
         String sql = "insert into users (user_name, access_name, creation_date, " +
-                "email, last_login, local_privacy, global_privacy) " +
-                "values (:name, :access, :creation, :email, :last_login, :local_privacy, :global_privacy)";
+                "email, last_login, local_privacy, global_privacy, password) " +
+                "values (:name, :access, :creation, :email, :last_login, :local_privacy, :global_privacy, :password)";
 
         int saved = jdbcTemplate.update(sql, parameters);
 

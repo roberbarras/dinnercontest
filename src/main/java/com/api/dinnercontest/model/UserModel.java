@@ -1,5 +1,7 @@
 package com.api.dinnercontest.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDateTime;
 
 public class UserModel {
@@ -7,6 +9,9 @@ public class UserModel {
     private String userName;
 
     private String accessName;
+
+    @JsonIgnore
+    private String password;
 
     private LocalDateTime creationDate;
 
@@ -75,6 +80,14 @@ public class UserModel {
 
     public void setGlobalPrivacy(int globalPrivacy) {
         this.globalPrivacy = globalPrivacy;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

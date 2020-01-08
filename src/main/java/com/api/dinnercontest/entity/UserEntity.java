@@ -10,6 +10,8 @@ public class UserEntity {
 
     private String accessName;
 
+    private String password;
+
     private LocalDateTime creationDate;
 
     private LocalDateTime lastLogin;
@@ -74,6 +76,14 @@ public class UserEntity {
 
     public void setGlobalPrivacy(int globalPrivacy) {
         this.globalPrivacy = globalPrivacy;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
