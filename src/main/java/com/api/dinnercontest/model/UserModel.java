@@ -1,7 +1,5 @@
 package com.api.dinnercontest.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.time.LocalDateTime;
 
 public class UserModel {
@@ -10,7 +8,6 @@ public class UserModel {
 
     private String accessName;
 
-    @JsonIgnore
     private String password;
 
     private LocalDateTime creationDate;

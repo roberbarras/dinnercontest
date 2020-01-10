@@ -18,7 +18,7 @@ function validateForm() {
     console.log("CLASE USER:" + JSON.stringify(user));
 
     var request = new XMLHttpRequest();
-    request.open("POST", "http://localhost:8080/v1/user");
+    request.open("POST", "http://localhost:8080/api/user");
     request.setRequestHeader("Content-Type", "application/json");
     request.send(JSON.stringify(user));
     console.log("RESPONSE: " + request.response);

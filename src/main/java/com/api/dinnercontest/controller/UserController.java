@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Slf4j
 @RestController
-@RequestMapping("/v1")
+@RequestMapping("/api")
 public class UserController {
 
     private UserService userService;
