@@ -1,6 +1,7 @@
 package com.api.dinnercontest.controller;
 
 import com.api.dinnercontest.model.LoginModel;
+import com.api.dinnercontest.model.TokenModel;
 import com.api.dinnercontest.service.LoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +32,11 @@ public class LoginController {
     public ResponseEntity login(HttpServletRequest request, @RequestBody LoginModel loginModel) {
         //log.info("[REQUEST RECEIVED    -    POST    /user    {}]", userModel.getName());
         if (loginService.accessSuccesful(loginModel)) {
+            TokenModel tokenModel = new TokenModel();
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.setLocation(ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand().toUri());
-            return new ResponseEntity<>(loginService.setToken(loginModel.getAccessName()), httpHeaders, HttpStatus.CREATED);
+            tokenModel.setToken(loginService.setToken(loginModel.getAccessName()));
+            return new ResponseEntity<>(tokenModel, httpHeaders, HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }

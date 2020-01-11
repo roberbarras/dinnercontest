@@ -19,7 +19,7 @@ public class UserService {
     }
 
     public void save(UserModel userModel) {
-        userModel.setPassword(BCrypt.hashpw(userModel.getPassword(), BCrypt.gensalt(15)));
+        userModel.setPassword(BCrypt.hashpw(userModel.getPassword(), BCrypt.gensalt(10)));
         userRepository.save(UserConverter.toEntity(userModel));
     }
 
