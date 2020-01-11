@@ -15,11 +15,15 @@ create table users
 
 create table tokens
 (
-	access_name varchar not null
-		constraint tokens_pk
-			primary key,
-	token varchar
+	access_name varchar,
+	token varchar,
+	constraint tokens_pk
+		unique (access_name, token)
 );
+
+alter table tokens owner to postgres;
+
+
 
 
 alter table users
