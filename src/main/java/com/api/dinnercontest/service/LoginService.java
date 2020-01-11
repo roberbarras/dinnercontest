@@ -1,6 +1,7 @@
 package com.api.dinnercontest.service;
 
 import com.api.dinnercontest.model.LoginModel;
+import com.api.dinnercontest.model.UserTokenModel;
 import com.api.dinnercontest.repository.LoginRepository;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,10 @@ public class LoginService {
         String token = generateToken();
         loginRepository.setToken(accessName, token);
         return token;
+    }
+
+    public boolean checkToken(UserTokenModel userTokenModel) {
+        return loginRepository.checkToken(userTokenModel) > 0;
     }
 
     public String generateToken() {

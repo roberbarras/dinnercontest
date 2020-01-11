@@ -2,6 +2,7 @@ package com.api.dinnercontest.controller;
 
 import com.api.dinnercontest.model.LoginModel;
 import com.api.dinnercontest.model.TokenModel;
+import com.api.dinnercontest.model.UserTokenModel;
 import com.api.dinnercontest.service.LoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +31,23 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity login(HttpServletRequest request, @RequestBody LoginModel loginModel) {
-        //log.info("[REQUEST RECEIVED    -    POST    /user    {}]", userModel.getName());
+        //log.info("[REQUEST RECEIVED    -    POST    /login    {}]", loginModel.getName());
         if (loginService.accessSuccesful(loginModel)) {
             TokenModel tokenModel = new TokenModel();
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.setLocation(ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand().toUri());
             tokenModel.setToken(loginService.setToken(loginModel.getAccessName()));
             return new ResponseEntity<>(tokenModel, httpHeaders, HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
+
+    @PostMapping("/check-token")
+    public ResponseEntity checkToken(HttpServletRequest request, @RequestBody UserTokenModel userTokenModel) {
+        //log.info("[REQUEST RECEIVED    -    POST    /user    {}]", userModel.getName());
+        if (loginService.checkToken(userTokenModel)) {
+            return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
