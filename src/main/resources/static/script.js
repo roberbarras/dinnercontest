@@ -42,26 +42,39 @@ function login() {
     console.log("CLASE USER:" + JSON.stringify(login));
 
     var request = new XMLHttpRequest();
-    request.open("POST", "http://localhost:8080/api/login", false);
+
+
+    request.onload = function () {
+        if (request.readyState == 4 && request.status == 201) {
+            swal.close();
+            swal("Bienvenido " + login.accessName);
+        }
+        if (request.readyState == 4 && (request.status == 403)) {
+            swal.close();
+            swal("Datos incorrectos");
+        }
+    };
+    request.ontimeout = function () {
+        swal.close();
+        swal("Datos incorrectos");
+    };
+    request.open("POST", "http://localhost:8080/api/login", true);
     request.setRequestHeader("Content-Type", "application/json");
+    swal("Cargando", {
+        icon: 'loading.svg',
+        button: false,
+    });
+    request.timeout = 6000;
     request.send(JSON.stringify(login));
 
-    console.log("Estado de la peti:" + request.status);
-
-    alert(request.status == 201 ? "Bienvenido " + login.accessName : "Datos incorrectos");
-    console.log("RESPONSE: " + request.response);
 }
 
-function switchRegister() {
-    document.getElementById("buttonLogin").style.display = "none";
-    document.getElementById("login").style.display = "none";
-    document.getElementById("buttonRegister").style.display = "block";
-    document.getElementById("register").style.display = "block";
-}
-
-function switchLogin() {
-    document.getElementById("buttonRegister").style.display = "none";
+function setLogin() {
     document.getElementById("register").style.display = "none";
-    document.getElementById("buttonLogin").style.display = "block";
     document.getElementById("login").style.display = "block";
+}
+
+function setRegister() {
+    document.getElementById("login").style.display = "none";
+    document.getElementById("register").style.display = "block";
 }
