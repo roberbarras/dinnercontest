@@ -1,4 +1,4 @@
-function register() {
+function registrar() {
 
     class User {
         constructor(userName, email, accessName, password) {
@@ -10,20 +10,34 @@ function register() {
 
     }
 
-    var user = new User(document.getElementById("register_nombre_input").value,
-        document.getElementById("register_mail_input").value,
+    var user = new User(document.getElementById("register_name_input").value,
+        document.getElementById("register_email_input").value,
         document.getElementById("register_access_input").value,
         document.getElementById("register_password_input").value);
-
-    console.log("CLASE USER:" + JSON.stringify(user));
 
     var request = new XMLHttpRequest();
     request.open("POST", "http://localhost:8080/api/user");
     request.setRequestHeader("Content-Type", "application/json");
     request.send(JSON.stringify(user));
-    console.log("RESPONSE: " + request.response);
 
-    switchLogin();
+    swal("Cargando", {
+        icon: 'loading.svg',
+        button: false,
+    });
+
+    request.onload = function () {
+        if (request.readyState == 4 && request.status == 201) {
+            swal("Registro completado", " ", "success", {
+                position: 'top-end',
+                icon: 'success',
+                title: 'Registro completado',
+                button: false,
+                timer: 1500
+            });
+            setLogin();
+        }
+    }
+
 }
 
 function login() {
@@ -39,28 +53,39 @@ function login() {
     var login = new Login(document.getElementById("login_access_input").value,
         document.getElementById("login_password_input").value);
 
-    console.log("CLASE USER:" + JSON.stringify(login));
-
     var request = new XMLHttpRequest();
 
 
     request.onload = function () {
         if (request.readyState == 4 && request.status == 201) {
             swal.close();
-            swal("Bienvenido " + login.accessName);
+            swal("Bienvenido ", " ", "success", {
+                position: 'top-end',
+                title: 'Bienvenido ' + login.accessName,
+                button: false,
+                timer: 1000
+            });
         }
         if (request.readyState == 4 && (request.status == 403)) {
             swal.close();
-            swal("Datos incorrectos");
+            swal("Datos incorrectos", " ", "error", {
+                position: 'top-end',
+                title: 'Datos incorrectos'
+            });
         }
     };
     request.ontimeout = function () {
         swal.close();
-        swal("Datos incorrectos");
+        swal("Ha habido un problema, inténtelo más tarde", " ", "error", {
+            position: 'top-end',
+            title: 'Ha habido un problema, inténtelo más tarde'
+        });
     };
     request.open("POST", "http://localhost:8080/api/login", true);
     request.setRequestHeader("Content-Type", "application/json");
-    swal("Cargando", {
+    swal("cargando", " ", {
+        title: 'Cargando',
+        position: 'top-end',
         icon: 'loading.svg',
         button: false,
     });
