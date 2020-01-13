@@ -69,16 +69,12 @@ function login() {
 
 }
 
-function switchRegister() {
-    document.getElementById("buttonLogin").style.display = "none";
-    document.getElementById("login").style.display = "none";
-    document.getElementById("buttonRegister").style.display = "block";
-    document.getElementById("register").style.display = "block";
+function setLogin() {
+    document.getElementById("register").style.display = "none";
+    document.getElementById("login").style.display = "block";
 }
 
-function switchLogin() {
-    document.getElementById("buttonRegister").style.display = "none";
-    document.getElementById("register").style.display = "none";
-    document.getElementById("buttonLogin").style.display = "block";
-    document.getElementById("login").style.display = "block";
+function setRegister() {
+    document.getElementById("login").style.display = "none";
+    document.getElementById("register").style.display = "block";
 }

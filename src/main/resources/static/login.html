@@ -21,9 +21,9 @@
 
 <body>
 <div class="bg-image"></div>
-<div class="container ">
+<div class="container">
     <div class="row">
-        <div class="login-container col-lg-4 col-md-6 col-sm-8 col-xs-12">
+        <div id="login" class="login-container col-lg-4 col-md-6 col-sm-8 col-xs-12">
             <div class="login-title text-center">
             </div>
             <div class="login-content">
@@ -60,7 +60,59 @@
                 </div> <!-- end  login-body -->
             </div><!-- end  login-content -->
             <div class="login-footer text-center template">
-                <h5>No tienes cuenta?<a href="#" class="bold"> Registrarse </a></h5>
+                <h5>No tienes cuenta?<a class="bold" onclick="setRegister()" href="#"> Registrarse </a></h5>
+            </div>
+        </div>  <!-- end  login-container -->
+
+        <div id="register" class="login-container col-lg-4 col-md-6 col-sm-8 col-xs-12" style="display: none;">
+            <div class="login-title text-center">
+            </div>
+            <div class="login-content">
+                <div class="login-header ">
+                    <h3><strong>Bienvenido,</strong></h3>
+                    <h5>Introduce tus datos para acceder o regístrate</h5>
+                </div>
+                <div class="login-body">
+                    <!--<form role="form" action="" method="post" class="login-form">-->
+                    <div class="form-group ">
+                        <div class="pos-r">
+                            <input id="register_name_input" type="text" name="form-username" placeholder="Nombre"
+                                   class="form-username form-control" required>
+                            <i class="fa fa-address-card"></i>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="pos-r">
+                            <input id="register_access_input" type="text" name="form-username" placeholder="Usuario"
+                                   class="form-username form-control" required>
+                            <i class="fa fa-user"></i>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="pos-r">
+                            <input id="register_email_input" type="text" name="form-username" placeholder="Correo"
+                                   class="form-username form-control" required>
+                            <i class="fa fa-envelope-square"></i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="pos-r">
+                            <input id="register_password_input" type="password" name="form-password"
+                                   placeholder="Contraseña" class="form-password form-control" required>
+                            <i class="fa fa-lock"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary form-control" onclick="registrar()">
+                            <strong>Registrar</strong></button>
+                    </div>
+
+                    <!--</form>-->
+                </div> <!-- end  login-body -->
+            </div><!-- end  login-content -->
+            <div id="back-to-login" class="login-footer text-center template">
+                <h5>Ya tienes cuenta?<a class="bold" onclick="setLogin()" href="#"> Entra </a></h5>
             </div>
         </div>  <!-- end  login-container -->
 
