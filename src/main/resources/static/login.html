@@ -84,13 +84,14 @@
                     <div class="form-group ">
                         <div class="pos-r">
                             <input id="register_access_input" type="text" name="form-username" placeholder="Usuario"
-                                   class="form-username form-control" required>
+                                   onchange="exist()" class="form-username form-control" required>
                             <i class="fa fa-user"></i>
                         </div>
+                        <p id="unavailable" style="color:#CC0000;" hidden>El nombre de usuario no está disponible</p>
                     </div>
                     <div class="form-group ">
                         <div class="pos-r">
-                            <input id="register_email_input" type="text" name="form-username" placeholder="Correo"
+                            <input id="register_email_input" type="email" name="form-username" placeholder="Correo"
                                    class="form-username form-control" required>
                             <i class="fa fa-envelope-square"></i>
                         </div>
@@ -104,7 +105,8 @@
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary form-control" onclick="registrar()">
+                        <button type="submit" id="registarbutton" class="btn btn-primary form-control"
+                                onclick="registrar()">
                             <strong>Registrar</strong></button>
                     </div>
 

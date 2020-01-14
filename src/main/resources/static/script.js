@@ -20,7 +20,9 @@ function registrar() {
     request.setRequestHeader("Content-Type", "application/json");
     request.send(JSON.stringify(user));
 
-    swal("Cargando", {
+    swal("cargando", " ", {
+        title: 'Cargando',
+        position: 'top-end',
         icon: 'loading.svg',
         button: false,
     });
@@ -38,6 +40,23 @@ function registrar() {
         }
     }
 
+}
+
+function exist() {
+    var request = new XMLHttpRequest();
+    request.open("GET", "http://localhost:8080/api/user/exist/" + document.getElementById("register_access_input").value);
+    request.send();
+    request.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200 && this.responseText == 'true') {
+            document.getElementById("register_access_input").style.setProperty("box-shadow", "0 0 10px #CC0000");
+            document.getElementById("unavailable").style.display = "block";
+            document.getElementById("registarbutton").disabled = true;
+        } else {
+            document.getElementById("register_access_input").style.setProperty("box-shadow", "none");
+            document.getElementById("unavailable").style.display = "none";
+            document.getElementById("registarbutton").disabled = false;
+        }
+    };
 }
 
 function login() {
