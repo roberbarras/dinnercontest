@@ -114,7 +114,7 @@ function login() {
                 timer: 1000
             });
         }
-        if (request.readyState == 4 && (request.status == 403)) {
+        if (request.readyState == 4 && (request.status >= 400)) {
             swal.close();
             swal("Datos incorrectos", " ", "error", {
                 position: 'top-end',
