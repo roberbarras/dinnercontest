@@ -7,6 +7,7 @@ import com.api.dinnercontest.exception.RowAlreadyExistException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.InvalidDataAccessResourceUsageException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -65,6 +66,13 @@ public class RestControllerAdvice {
     public ResponseEntity<Object> exception(DataAccessResourceFailureException exception) {
         //log.error(exception.getLocalizedMessage());
         ApiError apiError = new ApiError(HttpStatus.BAD_GATEWAY, exception.getLocalizedMessage(), exception.getMessage());
+        return new ResponseEntity(apiError, apiError.getStatus());
+    }
+
+    @ExceptionHandler(value = DuplicateKeyException.class)
+    public ResponseEntity<Object> exception(DuplicateKeyException exception) {
+        //log.error(exception.getCause().getLocalizedMessage());
+        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, exception.getLocalizedMessage(), exception.getMessage());
         return new ResponseEntity(apiError, apiError.getStatus());
     }
 

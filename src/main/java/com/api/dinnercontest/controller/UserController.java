@@ -31,6 +31,12 @@ public class UserController {
         return new ResponseEntity<>(userService.getUser(id), HttpStatus.OK);
     }
 
+    @GetMapping("/user/exist/{user}")
+    public ResponseEntity isUsed(@PathVariable(value = "user") String user) {
+        //log.info("[REQUEST RECEIVED    -    GET    /user/{}]", user);
+        return ResponseEntity.ok().body(userService.isUsed(user));
+    }
+
     @PostMapping("/user")
     public ResponseEntity postUser(HttpServletRequest request, @RequestBody UserModel userModel) {
         //log.info("[REQUEST RECEIVED    -    POST    /user    {}]", userModel.getName());

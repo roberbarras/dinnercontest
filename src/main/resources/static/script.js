@@ -1,5 +1,11 @@
 function registrar() {
 
+    var inicioErrorVarios = "Los campos";
+    var inicioErrorUno = "El campo";
+    var mensajeError = [];
+    var finErrorVarios = ", son obligatorios.";
+    var finErrorUno = " es obligatorio.";
+
     class User {
         constructor(userName, email, accessName, password) {
             this.userName = userName;
@@ -7,7 +13,6 @@ function registrar() {
             this.accessName = accessName;
             this.password = password;
         }
-
     }
 
     var user = new User(document.getElementById("register_name_input").value,
@@ -15,29 +20,72 @@ function registrar() {
         document.getElementById("register_access_input").value,
         document.getElementById("register_password_input").value);
 
-    var request = new XMLHttpRequest();
-    request.open("POST", "http://localhost:8080/api/user");
-    request.setRequestHeader("Content-Type", "application/json");
-    request.send(JSON.stringify(user));
+    if (user.userName === "") {
+        mensajeError.push(" nombre");
+    }
 
-    swal("Cargando", {
-        icon: 'loading.svg',
-        button: false,
-    });
+    if (user.accessName === "") {
+        mensajeError.push(" usuario");
+    }
 
-    request.onload = function () {
-        if (request.readyState == 4 && request.status == 201) {
-            swal("Registro completado", " ", "success", {
-                position: 'top-end',
-                icon: 'success',
-                title: 'Registro completado',
-                button: false,
-                timer: 1500
-            });
-            setLogin();
+    if (user.password === "") {
+        mensajeError.push(" contraseña");
+    }
+
+    if (mensajeError.length > 1) {
+        swal("Error ", " ", "error", {
+            position: 'top-end',
+            title: inicioErrorVarios.concat(mensajeError.join(', ')).concat(finErrorVarios),
+        });
+    } else if (mensajeError.length === 1) {
+        swal("Error ", " ", "error", {
+            position: 'top-end',
+            title: inicioErrorUno.concat(mensajeError).concat(finErrorUno),
+        });
+    } else {
+        var request = new XMLHttpRequest();
+        request.open("POST", "http://localhost:8080/api/user");
+        request.setRequestHeader("Content-Type", "application/json");
+        request.send(JSON.stringify(user));
+
+        swal("cargando", " ", {
+            title: 'Cargando',
+            position: 'top-end',
+            icon: 'loading.svg',
+            button: false,
+        });
+
+        request.onload = function () {
+            if (request.readyState == 4 && request.status == 201) {
+                swal("Registro completado", " ", "success", {
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Registro completado',
+                    button: false,
+                    timer: 1500
+                });
+                setLogin();
+            }
         }
     }
 
+}
+
+function exist() {
+    var request = new XMLHttpRequest();
+    request.open("GET", "http://localhost:8080/api/user/exist/" + document.getElementById("register_access_input").value);
+    request.send();
+    request.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200 && this.responseText == 'true') {
+            document.getElementById("register_access_input").style.setProperty("box-shadow", "0 0 10px #CC0000");
+            document.getElementById("unavailable").style.display = "block";
+            document.getElementById("registarbutton").disabled = true;
+        } else {
+            document.getElementById("register_access_input").style.setProperty("box-shadow", "none");
+            document.getElementById("unavailable").style.display = "none";
+            document.getElementById("registarbutton").disabled = false;
+        }
+    };
 }
 
 function login() {

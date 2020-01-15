@@ -26,4 +26,8 @@ public class UserService {
     public void joinGroup(UserGroupModel userGroupModel) {
         userRepository.join(userGroupModel);
     }
+
+    public boolean isUsed(String user) {
+        return userRepository.isUsed(user) > 0;
+    }
 }

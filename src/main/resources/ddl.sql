@@ -21,13 +21,12 @@ create table tokens
 		unique (access_name, token)
 );
 
+create unique index users_access_name_uindex
+    on users (access_name);
+
 alter table tokens owner to postgres;
-
-
-
 
 alter table users
     owner to postgres;
 
-create unique index users_access_name_uindex
-    on users (access_name);
+

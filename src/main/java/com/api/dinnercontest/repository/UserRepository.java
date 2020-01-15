@@ -91,4 +91,15 @@ public class UserRepository {
         //log.info("User joined: {} ", userGroupModel);
 
     }
+
+    public Integer isUsed(String user) {
+
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("user", user);
+
+        String sql = "select count(u.access_name) from users u where u.access_name = :user";
+
+        return this.jdbcTemplate.queryForObject(sql, parameters, Integer.class);
+
+    }
 }
