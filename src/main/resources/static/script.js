@@ -98,11 +98,16 @@ function login() {
 
     }
 
+    class Token {
+        constructor(token) {
+            this.token = token;
+        }
+    }
+
     var login = new Login(document.getElementById("login_access_input").value,
         document.getElementById("login_password_input").value);
 
     var request = new XMLHttpRequest();
-
 
     request.onload = function () {
         if (request.readyState == 4 && request.status == 201) {
@@ -113,6 +118,11 @@ function login() {
                 button: false,
                 timer: 1000
             });
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            const token = JSON.parse(request.responseText);
+            localStorage.setItem("token", token.token);
+            localStorage.setItem("user", login.accessName);
         }
         if (request.readyState == 4 && (request.status >= 400)) {
             swal.close();
