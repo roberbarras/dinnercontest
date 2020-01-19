@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 public class UserModel {
 
+    private Long userId;
+
     private String userName;
 
     private String accessName;
