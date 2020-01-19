@@ -42,7 +42,7 @@ public class GroupController {
 
     @PostMapping("/group")
     public ResponseEntity postUser(HttpServletRequest request, @RequestBody GroupModel groupModel) {
-        log.info("[REQUEST RECEIVED    -    POST    /group    {}]", groupModel.getName());
+        log.info("[REQUEST RECEIVED    -    POST    /group    {}]", groupModel.getGroupName());
         groupService.save(groupModel);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setLocation(ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand().toUri());

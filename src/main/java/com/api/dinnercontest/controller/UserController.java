@@ -47,6 +47,7 @@ public class UserController {
         userService.save(userModel);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setLocation(ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand().toUri());
+        userModel.setPassword("");
         return new ResponseEntity<>(userModel, httpHeaders, HttpStatus.CREATED);
     }
 

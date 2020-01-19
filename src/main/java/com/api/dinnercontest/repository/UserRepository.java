@@ -1,8 +1,8 @@
 package com.api.dinnercontest.repository;
 
 import com.api.dinnercontest.controller.LoginController;
-import com.api.dinnercontest.entity.UserEntity;
 import com.api.dinnercontest.model.UserGroupModel;
+import com.api.dinnercontest.model.UserModel;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,15 +27,15 @@ public class UserRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public UserEntity findById(Long id) {
+    public UserModel findById(Long id) {
 
         log.info("Start find user for id {}", id);
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("id", id);
 
-        RowMapper<UserEntity> mapper = (rs, rowNum) -> {
-            UserEntity user = new UserEntity();
+        RowMapper<UserModel> mapper = (rs, rowNum) -> {
+            UserModel user = new UserModel();
             user.setUserName(rs.getString("user_name"));
             user.setAccessName(rs.getString("access_name"));
             user.setCreationDate(rs.getTimestamp("creation_date").toLocalDateTime());
@@ -50,26 +50,26 @@ public class UserRepository {
                 "from users u where u.user_id = :id " +
                 "limit 1";
 
-        UserEntity user = this.jdbcTemplate.query(sql, parameters, mapper).get(0);
+        UserModel user = this.jdbcTemplate.query(sql, parameters, mapper).get(0);
 
         log.info("User found: {} ", user.toString());
 
         return user;
     }
 
-    public void save(UserEntity userEntity) {
+    public void save(UserModel userModel) {
 
-        log.info("Start save user with name {}", userEntity.getAccessName());
+        log.info("Start save user with name {}", userModel.getAccessName());
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
-        parameters.addValue("name", userEntity.getUserName());
-        parameters.addValue("access", userEntity.getAccessName());
+        parameters.addValue("name", userModel.getUserName());
+        parameters.addValue("access", userModel.getAccessName());
         parameters.addValue("creation", LocalDateTime.now());
-        parameters.addValue("email", userEntity.getEmail());
+        parameters.addValue("email", userModel.getEmail());
         parameters.addValue("last_login", LocalDateTime.of(2000, 1, 1, 0, 0));
         parameters.addValue("local_privacy", 0);
         parameters.addValue("global_privacy", 0);
-        parameters.addValue("password", userEntity.getPassword());
+        parameters.addValue("password", userModel.getPassword());
 
         String sql = "insert into users (user_name, access_name, creation_date, " +
                 "email, last_login, local_privacy, global_privacy, password) " +

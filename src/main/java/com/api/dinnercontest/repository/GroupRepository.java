@@ -1,7 +1,7 @@
 package com.api.dinnercontest.repository;
 
 import com.api.dinnercontest.controller.LoginController;
-import com.api.dinnercontest.entity.GroupEntity;
+import com.api.dinnercontest.model.GroupModel;
 import com.api.dinnercontest.model.UserModel;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -28,22 +28,22 @@ public class GroupRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public GroupEntity findById(Long id) {
+    public GroupModel findById(Long id) {
 
         log.info("Start find group for id {}", id);
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("id", id);
 
-        RowMapper<GroupEntity> mapper = (rs, rowNum) -> {
-            GroupEntity group = new GroupEntity();
+        RowMapper<GroupModel> mapper = (rs, rowNum) -> {
+            GroupModel group = new GroupModel();
             group.setGroupName(rs.getString("group_name"));
             return group;
         };
 
         String sql = "select groups.group_name from groups where group_id = :id limit 1";
 
-        GroupEntity group = jdbcTemplate.query(sql, parameters, mapper).get(0);
+        GroupModel group = jdbcTemplate.query(sql, parameters, mapper).get(0);
 
         log.info("Groups found: {} ", group.toString());
 
@@ -58,8 +58,8 @@ public class GroupRepository {
         parameters.addValue("name", name);
         parameters.addValue("creation", LocalDateTime.now());
 
-        RowMapper<GroupEntity> mapper = (rs, rowNum) -> {
-            GroupEntity group = new GroupEntity();
+        RowMapper<GroupModel> mapper = (rs, rowNum) -> {
+            GroupModel group = new GroupModel();
             group.setGroupName(rs.getString("name"));
             return group;
         };
