@@ -1021,3 +1021,169 @@
 2020-01-19 19:43:38,982 DEBUG com.zaxxer.hikari.pool.PoolBase [HikariPool-1 connection closer] HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@1a9da0fb: (connection evicted)
 2020-01-19 19:43:38,987 DEBUG com.zaxxer.hikari.pool.HikariPool [SpringContextShutdownHook] HikariPool-1 - After shutdown stats (total=0, active=0, idle=0, waiting=0)
 2020-01-19 19:43:38,987 INFO com.zaxxer.hikari.HikariDataSource [SpringContextShutdownHook] HikariPool-1 - Shutdown completed.
+2020-01-19 22:30:08,954 INFO com.api.dinnercontest.DinnercontestApplication [main] Starting DinnercontestApplication on desktop with PID 8569 (/home/user/github/dinnercontest/target/classes started by user in /home/user/github/dinnercontest)
+2020-01-19 22:30:08,956 DEBUG com.api.dinnercontest.DinnercontestApplication [main] Running with Spring Boot v2.2.2.RELEASE, Spring v5.2.2.RELEASE
+2020-01-19 22:30:08,957 INFO com.api.dinnercontest.DinnercontestApplication [main] The following profiles are active: development
+2020-01-19 22:30:10,242 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2020-01-19 22:30:10,327 INFO org.springframework.web.context.ContextLoader [main] Root WebApplicationContext: initialization completed in 1302 ms
+2020-01-19 22:30:10,416 DEBUG com.zaxxer.hikari.HikariConfig [main] Driver class org.postgresql.Driver found in Thread context class loader jdk.internal.loader.ClassLoaders$AppClassLoader@42a57993
+2020-01-19 22:30:10,671 INFO org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [main] Initializing ExecutorService 'applicationTaskExecutor'
+2020-01-19 22:30:10,756 INFO org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [main] Adding welcome page: class path resource [static/index.html]
+2020-01-19 22:30:10,913 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2020-01-19 22:30:10,918 INFO com.api.dinnercontest.DinnercontestApplication [main] Started DinnercontestApplication in 2.594 seconds (JVM running for 5.88)
+2020-01-19 22:32:23,190 INFO org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-2] Initializing Servlet 'dispatcherServlet'
+2020-01-19 22:32:23,198 INFO org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-2] Completed initialization in 8 ms
+2020-01-19 22:32:23,296 INFO com.api.dinnercontest.controller.GroupController [http-nio-8080-exec-2] [REQUEST RECEIVED    -    POST    /category    Limpieza]
+2020-01-19 22:32:23,311 INFO com.api.dinnercontest.controller.LoginController [http-nio-8080-exec-2] Start saving category Limpieza
+2020-01-19 22:32:23,319 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] HikariPool-1 - configuration:
+2020-01-19 22:32:23,322 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] allowPoolSuspension.............false
+2020-01-19 22:32:23,322 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] autoCommit......................true
+2020-01-19 22:32:23,323 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] catalog.........................none
+2020-01-19 22:32:23,323 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] connectionInitSql...............none
+2020-01-19 22:32:23,323 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] connectionTestQuery.............none
+2020-01-19 22:32:23,323 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] connectionTimeout...............30000
+2020-01-19 22:32:23,323 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] dataSource......................none
+2020-01-19 22:32:23,323 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] dataSourceClassName.............none
+2020-01-19 22:32:23,323 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] dataSourceJNDI..................none
+2020-01-19 22:32:23,324 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] dataSourceProperties............{password=<masked>}
+2020-01-19 22:32:23,324 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] driverClassName................."org.postgresql.Driver"
+2020-01-19 22:32:23,324 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] healthCheckProperties...........{}
+2020-01-19 22:32:23,324 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] healthCheckRegistry.............none
+2020-01-19 22:32:23,324 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] idleTimeout.....................600000
+2020-01-19 22:32:23,325 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] initializationFailTimeout.......1
+2020-01-19 22:32:23,325 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] isolateInternalQueries..........false
+2020-01-19 22:32:23,325 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] jdbcUrl.........................jdbc:postgresql://localhost:5432/dinnercontest
+2020-01-19 22:32:23,325 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] leakDetectionThreshold..........0
+2020-01-19 22:32:23,325 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] maxLifetime.....................1800000
+2020-01-19 22:32:23,325 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] maximumPoolSize.................10
+2020-01-19 22:32:23,325 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] metricRegistry..................none
+2020-01-19 22:32:23,325 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] metricsTrackerFactory...........none
+2020-01-19 22:32:23,325 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] minimumIdle.....................10
+2020-01-19 22:32:23,326 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] password........................<masked>
+2020-01-19 22:32:23,326 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] poolName........................"HikariPool-1"
+2020-01-19 22:32:23,326 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] readOnly........................false
+2020-01-19 22:32:23,326 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] registerMbeans..................false
+2020-01-19 22:32:23,326 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] scheduledExecutor...............none
+2020-01-19 22:32:23,326 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] schema..........................none
+2020-01-19 22:32:23,326 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] threadFactory...................internal
+2020-01-19 22:32:23,326 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] transactionIsolation............default
+2020-01-19 22:32:23,326 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] username........................"postgres"
+2020-01-19 22:32:23,326 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] validationTimeout...............5000
+2020-01-19 22:32:23,326 INFO com.zaxxer.hikari.HikariDataSource [http-nio-8080-exec-2] HikariPool-1 - Starting...
+2020-01-19 22:32:23,734 DEBUG com.zaxxer.hikari.pool.HikariPool [http-nio-8080-exec-2] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@f00cc2c
+2020-01-19 22:32:23,737 INFO com.zaxxer.hikari.HikariDataSource [http-nio-8080-exec-2] HikariPool-1 - Start completed.
+2020-01-19 22:32:23,837 DEBUG com.zaxxer.hikari.pool.HikariPool [HikariPool-1 housekeeper] HikariPool-1 - Pool stats (total=1, active=0, idle=1, waiting=0)
+2020-01-19 22:32:23,869 ERROR com.api.dinnercontest.controller.LoginController [http-nio-8080-exec-2] PreparedStatementCallback; bad SQL grammar [insert into category (category_name, weighing) VALUES (?, ?)]; nested exception is org.postgresql.util.PSQLException: ERROR: column "weighing" is of type integer but expression is of type character varying
+  Hint: You will need to rewrite or cast the expression.
+  Position: 60
+2020-01-19 22:32:23,884 DEBUG com.zaxxer.hikari.pool.HikariPool [HikariPool-1 connection adder] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@e643566
+2020-01-19 22:32:23,929 DEBUG com.zaxxer.hikari.pool.HikariPool [HikariPool-1 connection adder] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4f593f5d
+2020-01-19 22:32:23,963 DEBUG com.zaxxer.hikari.pool.HikariPool [HikariPool-1 connection adder] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2f76c012
+2020-01-19 22:32:24,013 DEBUG com.zaxxer.hikari.pool.HikariPool [HikariPool-1 connection adder] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@63dd481
+2020-01-19 22:32:24,050 DEBUG com.zaxxer.hikari.pool.HikariPool [HikariPool-1 connection adder] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2b381bdd
+2020-01-19 22:32:24,100 DEBUG com.zaxxer.hikari.pool.HikariPool [HikariPool-1 connection adder] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2062e9af
+2020-01-19 22:32:24,123 DEBUG com.zaxxer.hikari.pool.HikariPool [HikariPool-1 connection adder] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@18dfd039
+2020-01-19 22:32:24,165 DEBUG com.zaxxer.hikari.pool.HikariPool [HikariPool-1 connection adder] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7d0ccb5d
+2020-01-19 22:32:24,190 DEBUG com.zaxxer.hikari.pool.HikariPool [HikariPool-1 connection adder] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@fecf1f4
+2020-01-19 22:32:24,190 DEBUG com.zaxxer.hikari.pool.HikariPool [HikariPool-1 connection adder] HikariPool-1 - After adding stats (total=10, active=0, idle=10, waiting=0)
+2020-01-19 22:32:45,587 INFO com.api.dinnercontest.controller.GroupController [http-nio-8080-exec-1] [REQUEST RECEIVED    -    POST    /group-categories]
+2020-01-19 22:32:45,597 INFO com.api.dinnercontest.controller.LoginController [http-nio-8080-exec-1] Start save Group Category
+2020-01-19 22:32:45,608 INFO com.api.dinnercontest.controller.LoginController [http-nio-8080-exec-1] Category group relation saved
+2020-01-19 22:32:53,839 DEBUG com.zaxxer.hikari.pool.HikariPool [HikariPool-1 housekeeper] HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2020-01-19 22:33:23,840 DEBUG com.zaxxer.hikari.pool.HikariPool [HikariPool-1 housekeeper] HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2020-01-19 22:33:25,620 INFO org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [SpringContextShutdownHook] Shutting down ExecutorService 'applicationTaskExecutor'
+2020-01-19 22:33:25,622 INFO com.zaxxer.hikari.HikariDataSource [SpringContextShutdownHook] HikariPool-1 - Shutdown initiated...
+2020-01-19 22:33:25,623 DEBUG com.zaxxer.hikari.pool.HikariPool [SpringContextShutdownHook] HikariPool-1 - Before shutdown stats (total=10, active=0, idle=10, waiting=0)
+2020-01-19 22:33:25,625 DEBUG com.zaxxer.hikari.pool.PoolBase [HikariPool-1 connection closer] HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@f00cc2c: (connection evicted)
+2020-01-19 22:33:25,629 DEBUG com.zaxxer.hikari.pool.PoolBase [HikariPool-1 connection closer] HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@e643566: (connection evicted)
+2020-01-19 22:33:25,631 DEBUG com.zaxxer.hikari.pool.PoolBase [HikariPool-1 connection closer] HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@4f593f5d: (connection evicted)
+2020-01-19 22:33:25,632 DEBUG com.zaxxer.hikari.pool.PoolBase [HikariPool-1 connection closer] HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@2f76c012: (connection evicted)
+2020-01-19 22:33:25,633 DEBUG com.zaxxer.hikari.pool.PoolBase [HikariPool-1 connection closer] HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@63dd481: (connection evicted)
+2020-01-19 22:33:25,636 DEBUG com.zaxxer.hikari.pool.PoolBase [HikariPool-1 connection closer] HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@2b381bdd: (connection evicted)
+2020-01-19 22:33:25,637 DEBUG com.zaxxer.hikari.pool.PoolBase [HikariPool-1 connection closer] HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@2062e9af: (connection evicted)
+2020-01-19 22:33:25,640 DEBUG com.zaxxer.hikari.pool.PoolBase [HikariPool-1 connection closer] HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@18dfd039: (connection evicted)
+2020-01-19 22:33:25,641 DEBUG com.zaxxer.hikari.pool.PoolBase [HikariPool-1 connection closer] HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@7d0ccb5d: (connection evicted)
+2020-01-19 22:33:25,642 DEBUG com.zaxxer.hikari.pool.PoolBase [HikariPool-1 connection closer] HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@fecf1f4: (connection evicted)
+2020-01-19 22:33:25,644 DEBUG com.zaxxer.hikari.pool.HikariPool [SpringContextShutdownHook] HikariPool-1 - After shutdown stats (total=0, active=0, idle=0, waiting=0)
+2020-01-19 22:33:25,644 INFO com.zaxxer.hikari.HikariDataSource [SpringContextShutdownHook] HikariPool-1 - Shutdown completed.
+2020-01-19 22:33:32,734 INFO com.api.dinnercontest.DinnercontestApplication [main] Starting DinnercontestApplication on desktop with PID 9045 (/home/user/github/dinnercontest/target/classes started by user in /home/user/github/dinnercontest)
+2020-01-19 22:33:32,738 DEBUG com.api.dinnercontest.DinnercontestApplication [main] Running with Spring Boot v2.2.2.RELEASE, Spring v5.2.2.RELEASE
+2020-01-19 22:33:32,738 INFO com.api.dinnercontest.DinnercontestApplication [main] The following profiles are active: development
+2020-01-19 22:33:33,983 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2020-01-19 22:33:34,073 INFO org.springframework.web.context.ContextLoader [main] Root WebApplicationContext: initialization completed in 1243 ms
+2020-01-19 22:33:34,172 DEBUG com.zaxxer.hikari.HikariConfig [main] Driver class org.postgresql.Driver found in Thread context class loader jdk.internal.loader.ClassLoaders$AppClassLoader@42a57993
+2020-01-19 22:33:34,420 INFO org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [main] Initializing ExecutorService 'applicationTaskExecutor'
+2020-01-19 22:33:34,492 INFO org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping [main] Adding welcome page: class path resource [static/index.html]
+2020-01-19 22:33:34,656 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2020-01-19 22:33:34,673 INFO com.api.dinnercontest.DinnercontestApplication [main] Started DinnercontestApplication in 2.988 seconds (JVM running for 4.955)
+2020-01-19 22:33:36,433 INFO org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-2] Initializing Servlet 'dispatcherServlet'
+2020-01-19 22:33:36,443 INFO org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-2] Completed initialization in 10 ms
+2020-01-19 22:33:36,588 INFO com.api.dinnercontest.controller.GroupController [http-nio-8080-exec-2] [REQUEST RECEIVED    -    POST    /category    Limpieza]
+2020-01-19 22:33:36,609 INFO com.api.dinnercontest.controller.LoginController [http-nio-8080-exec-2] Start saving category Limpieza
+2020-01-19 22:33:36,620 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] HikariPool-1 - configuration:
+2020-01-19 22:33:36,628 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] allowPoolSuspension.............false
+2020-01-19 22:33:36,628 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] autoCommit......................true
+2020-01-19 22:33:36,629 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] catalog.........................none
+2020-01-19 22:33:36,629 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] connectionInitSql...............none
+2020-01-19 22:33:36,629 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] connectionTestQuery.............none
+2020-01-19 22:33:36,629 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] connectionTimeout...............30000
+2020-01-19 22:33:36,629 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] dataSource......................none
+2020-01-19 22:33:36,629 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] dataSourceClassName.............none
+2020-01-19 22:33:36,629 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] dataSourceJNDI..................none
+2020-01-19 22:33:36,630 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] dataSourceProperties............{password=<masked>}
+2020-01-19 22:33:36,630 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] driverClassName................."org.postgresql.Driver"
+2020-01-19 22:33:36,630 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] healthCheckProperties...........{}
+2020-01-19 22:33:36,631 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] healthCheckRegistry.............none
+2020-01-19 22:33:36,631 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] idleTimeout.....................600000
+2020-01-19 22:33:36,631 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] initializationFailTimeout.......1
+2020-01-19 22:33:36,631 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] isolateInternalQueries..........false
+2020-01-19 22:33:36,631 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] jdbcUrl.........................jdbc:postgresql://localhost:5432/dinnercontest
+2020-01-19 22:33:36,631 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] leakDetectionThreshold..........0
+2020-01-19 22:33:36,632 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] maxLifetime.....................1800000
+2020-01-19 22:33:36,632 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] maximumPoolSize.................10
+2020-01-19 22:33:36,632 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] metricRegistry..................none
+2020-01-19 22:33:36,632 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] metricsTrackerFactory...........none
+2020-01-19 22:33:36,632 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] minimumIdle.....................10
+2020-01-19 22:33:36,632 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] password........................<masked>
+2020-01-19 22:33:36,632 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] poolName........................"HikariPool-1"
+2020-01-19 22:33:36,633 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] readOnly........................false
+2020-01-19 22:33:36,633 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] registerMbeans..................false
+2020-01-19 22:33:36,633 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] scheduledExecutor...............none
+2020-01-19 22:33:36,633 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] schema..........................none
+2020-01-19 22:33:36,633 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] threadFactory...................internal
+2020-01-19 22:33:36,633 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] transactionIsolation............default
+2020-01-19 22:33:36,633 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] username........................"postgres"
+2020-01-19 22:33:36,634 DEBUG com.zaxxer.hikari.HikariConfig [http-nio-8080-exec-2] validationTimeout...............5000
+2020-01-19 22:33:36,634 INFO com.zaxxer.hikari.HikariDataSource [http-nio-8080-exec-2] HikariPool-1 - Starting...
+2020-01-19 22:33:37,227 DEBUG com.zaxxer.hikari.pool.HikariPool [http-nio-8080-exec-2] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2aa0658c
+2020-01-19 22:33:37,230 INFO com.zaxxer.hikari.HikariDataSource [http-nio-8080-exec-2] HikariPool-1 - Start completed.
+2020-01-19 22:33:37,257 INFO com.api.dinnercontest.controller.LoginController [http-nio-8080-exec-2] Category Limpieza saved
+2020-01-19 22:33:37,330 DEBUG com.zaxxer.hikari.pool.HikariPool [HikariPool-1 housekeeper] HikariPool-1 - Pool stats (total=1, active=0, idle=1, waiting=0)
+2020-01-19 22:33:37,375 DEBUG com.zaxxer.hikari.pool.HikariPool [HikariPool-1 connection adder] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@33637309
+2020-01-19 22:33:37,409 DEBUG com.zaxxer.hikari.pool.HikariPool [HikariPool-1 connection adder] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@725e7932
+2020-01-19 22:33:37,447 DEBUG com.zaxxer.hikari.pool.HikariPool [HikariPool-1 connection adder] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1271867d
+2020-01-19 22:33:37,486 DEBUG com.zaxxer.hikari.pool.HikariPool [HikariPool-1 connection adder] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@24fe4a4d
+2020-01-19 22:33:37,526 DEBUG com.zaxxer.hikari.pool.HikariPool [HikariPool-1 connection adder] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@163f78ad
+2020-01-19 22:33:37,553 DEBUG com.zaxxer.hikari.pool.HikariPool [HikariPool-1 connection adder] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3b5506b6
+2020-01-19 22:33:37,577 DEBUG com.zaxxer.hikari.pool.HikariPool [HikariPool-1 connection adder] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@394c0fa2
+2020-01-19 22:33:37,603 DEBUG com.zaxxer.hikari.pool.HikariPool [HikariPool-1 connection adder] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7b43784d
+2020-01-19 22:33:37,629 DEBUG com.zaxxer.hikari.pool.HikariPool [HikariPool-1 connection adder] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@76f574e8
+2020-01-19 22:33:37,629 DEBUG com.zaxxer.hikari.pool.HikariPool [HikariPool-1 connection adder] HikariPool-1 - After adding stats (total=10, active=0, idle=10, waiting=0)
+2020-01-19 22:34:07,331 DEBUG com.zaxxer.hikari.pool.HikariPool [HikariPool-1 housekeeper] HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2020-01-19 22:34:37,333 DEBUG com.zaxxer.hikari.pool.HikariPool [HikariPool-1 housekeeper] HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2020-01-19 22:35:07,334 DEBUG com.zaxxer.hikari.pool.HikariPool [HikariPool-1 housekeeper] HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2020-01-19 22:35:13,265 INFO org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [SpringContextShutdownHook] Shutting down ExecutorService 'applicationTaskExecutor'
+2020-01-19 22:35:13,266 INFO com.zaxxer.hikari.HikariDataSource [SpringContextShutdownHook] HikariPool-1 - Shutdown initiated...
+2020-01-19 22:35:13,267 DEBUG com.zaxxer.hikari.pool.HikariPool [SpringContextShutdownHook] HikariPool-1 - Before shutdown stats (total=10, active=0, idle=10, waiting=0)
+2020-01-19 22:35:13,268 DEBUG com.zaxxer.hikari.pool.PoolBase [HikariPool-1 connection closer] HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@2aa0658c: (connection evicted)
+2020-01-19 22:35:13,274 DEBUG com.zaxxer.hikari.pool.PoolBase [HikariPool-1 connection closer] HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@33637309: (connection evicted)
+2020-01-19 22:35:13,275 DEBUG com.zaxxer.hikari.pool.PoolBase [HikariPool-1 connection closer] HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@725e7932: (connection evicted)
+2020-01-19 22:35:13,278 DEBUG com.zaxxer.hikari.pool.PoolBase [HikariPool-1 connection closer] HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@1271867d: (connection evicted)
+2020-01-19 22:35:13,279 DEBUG com.zaxxer.hikari.pool.PoolBase [HikariPool-1 connection closer] HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@24fe4a4d: (connection evicted)
+2020-01-19 22:35:13,282 DEBUG com.zaxxer.hikari.pool.PoolBase [HikariPool-1 connection closer] HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@163f78ad: (connection evicted)
+2020-01-19 22:35:13,283 DEBUG com.zaxxer.hikari.pool.PoolBase [HikariPool-1 connection closer] HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@3b5506b6: (connection evicted)
+2020-01-19 22:35:13,285 DEBUG com.zaxxer.hikari.pool.PoolBase [HikariPool-1 connection closer] HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@394c0fa2: (connection evicted)
+2020-01-19 22:35:13,286 DEBUG com.zaxxer.hikari.pool.PoolBase [HikariPool-1 connection closer] HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@7b43784d: (connection evicted)
+2020-01-19 22:35:13,287 DEBUG com.zaxxer.hikari.pool.PoolBase [HikariPool-1 connection closer] HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@76f574e8: (connection evicted)
+2020-01-19 22:35:13,290 DEBUG com.zaxxer.hikari.pool.HikariPool [SpringContextShutdownHook] HikariPool-1 - After shutdown stats (total=0, active=0, idle=0, waiting=0)
+2020-01-19 22:35:13,290 INFO com.zaxxer.hikari.HikariDataSource [SpringContextShutdownHook] HikariPool-1 - Shutdown completed.

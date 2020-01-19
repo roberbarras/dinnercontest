@@ -1,5 +1,6 @@
 package com.api.dinnercontest.controller;
 
+import com.api.dinnercontest.model.GroupCategoryModel;
 import com.api.dinnercontest.model.GroupModel;
 import com.api.dinnercontest.service.GroupService;
 import lombok.extern.slf4j.Slf4j;
@@ -41,11 +42,18 @@ public class GroupController {
     }
 
     @PostMapping("/group")
-    public ResponseEntity postUser(HttpServletRequest request, @RequestBody GroupModel groupModel) {
+    public ResponseEntity postGroup(HttpServletRequest request, @RequestBody GroupModel groupModel) {
         log.info("[REQUEST RECEIVED    -    POST    /group    {}]", groupModel.getGroupName());
         groupService.save(groupModel);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setLocation(ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand().toUri());
         return new ResponseEntity<>(groupModel, httpHeaders, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/group-categories")
+    public ResponseEntity postGroupCategories(@RequestBody GroupCategoryModel groupCategoryModel) {
+        log.info("[REQUEST RECEIVED    -    POST    /group-categories]");
+        groupService.saveCategory(groupCategoryModel);
+        return new ResponseEntity<>(groupCategoryModel, HttpStatus.CREATED);
     }
 }

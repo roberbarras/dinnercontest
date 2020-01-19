@@ -1,6 +1,7 @@
 package com.api.dinnercontest.repository;
 
 import com.api.dinnercontest.controller.LoginController;
+import com.api.dinnercontest.model.GroupCategoryModel;
 import com.api.dinnercontest.model.GroupModel;
 import com.api.dinnercontest.model.UserModel;
 import lombok.extern.slf4j.Slf4j;
@@ -97,5 +98,18 @@ public class GroupRepository {
 
     }
 
+    public void saveCategory(GroupCategoryModel groupCategoryModel) {
 
+        log.info("Start save Group Category");
+
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("group", groupCategoryModel.getIdGroup());
+        parameters.addValue("category", groupCategoryModel.getIdCategory());
+
+        String sql = "insert into group_category (id_group, id_category) values (:group, :category)";
+
+        this.jdbcTemplate.update(sql, parameters);
+
+        log.info("Category group relation saved");
+    }
 }

@@ -47,6 +47,29 @@ create table user_group
 		primary key ("user", "group")
 );
 
+create table category
+(
+	id_category bigserial
+		constraint category_pk
+			primary key,
+	category_name varchar not null,
+	weighing int not null
+);
+
+create table group_category
+(
+	id_group bigserial
+		constraint group_category_groups_group_id_fk
+			references groups
+				on update cascade on delete cascade,
+	id_category bigserial
+		constraint group_category_fk
+			references category
+				on update cascade on delete cascade,
+	constraint group_category_pk
+		primary key (id_group, id_category)
+);
+
 create unique index group_group_name_uindex
     on groups (group_name);
 
