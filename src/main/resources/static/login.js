@@ -118,6 +118,7 @@ function login() {
                 button: false,
                 timer: 1000
             });
+            location.href = "/app.html";
             localStorage.removeItem("token");
             localStorage.removeItem("user");
             const token = JSON.parse(request.responseText);
