@@ -1,6 +1,9 @@
 package com.api.dinnercontest.repository;
 
+import com.api.dinnercontest.controller.LoginController;
 import com.api.dinnercontest.model.UserTokenModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -13,13 +16,15 @@ public class LoginRepository {
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
+    private static final Logger log = LoggerFactory.getLogger(LoginController.class);
+
     public LoginRepository(NamedParameterJdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
     public String getEncodedPassword(String accessName) {
 
-        //log.debug("Start getEncodedPassword for accessName {}", accessName);
+        log.debug("Start getEncodedPassword for accessName {}", accessName);
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("accessName", accessName);
@@ -33,14 +38,14 @@ public class LoginRepository {
 
         String password = this.jdbcTemplate.query(sql, parameters, mapper).get(0);
 
-        //log.debug("Encoded password found: {} ", password);
+        log.debug("Encoded password found: {} ", password);
 
         return password;
     }
 
     public void setToken(String accessName, String token) {
 
-        //log.debug("Start setToken for accessName {}", accessName);
+        log.debug("Start setToken for accessName {}", accessName);
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("accessName", accessName);
@@ -50,12 +55,13 @@ public class LoginRepository {
 
         this.jdbcTemplate.update(sql, parameters);
 
-        //log.debug("Token saved: {} ", token);
+        log.debug("Token saved: {} ", token);
 
     }
 
     public int checkToken(UserTokenModel userTokenModel) {
-        //log.debug("Start checkToken for accessName {}", accessName);
+
+        log.debug("Start checkToken for accessName {}", userTokenModel.getAccessName());
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("accessName", userTokenModel.getAccessName());
@@ -65,7 +71,7 @@ public class LoginRepository {
 
         Integer results = this.jdbcTemplate.queryForObject(sql, parameters, Integer.class);
 
-        //log.debug("results: {} ", results);
+        log.debug("results: {} ", results);
 
         return results != null ? results.intValue() : 0;
     }

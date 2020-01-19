@@ -1,8 +1,11 @@
 package com.api.dinnercontest.repository;
 
+import com.api.dinnercontest.controller.LoginController;
 import com.api.dinnercontest.entity.UserEntity;
 import com.api.dinnercontest.model.UserGroupModel;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -18,13 +21,15 @@ public class UserRepository {
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
+    private static final Logger log = LoggerFactory.getLogger(LoginController.class);
+
     public UserRepository(NamedParameterJdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
     public UserEntity findById(Long id) {
 
-        //log.info("Start find user for id {}", id);
+        log.info("Start find user for id {}", id);
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("id", id);
@@ -47,14 +52,14 @@ public class UserRepository {
 
         UserEntity user = this.jdbcTemplate.query(sql, parameters, mapper).get(0);
 
-        //log.info("User found: {} ", user.toString());
+        log.info("User found: {} ", user.toString());
 
         return user;
     }
 
     public void save(UserEntity userEntity) {
 
-        //log.info("Start save user with name {}", name);
+        log.info("Start save user with name {}", userEntity.getAccessName());
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("name", userEntity.getUserName());
@@ -72,13 +77,13 @@ public class UserRepository {
 
         int saved = jdbcTemplate.update(sql, parameters);
 
-        //log.info("Users saved: {} ", saved);
+        log.info("Users saved: {} ", saved);
 
     }
 
     public void join(UserGroupModel userGroupModel) {
 
-        //log.info("Start joining group");
+        log.info("Start joining group");
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("user", userGroupModel.getUserId());
@@ -89,7 +94,7 @@ public class UserRepository {
 
         int saved = jdbcTemplate.update(sql, parameters);
 
-        //log.info("User joined: {} ", userGroupModel);
+        log.info("User joined: {} ", userGroupModel);
 
     }
 

@@ -1,8 +1,11 @@
 package com.api.dinnercontest.repository;
 
+import com.api.dinnercontest.controller.LoginController;
 import com.api.dinnercontest.entity.GroupEntity;
 import com.api.dinnercontest.model.UserModel;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -19,13 +22,15 @@ public class GroupRepository {
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
+    private static final Logger log = LoggerFactory.getLogger(LoginController.class);
+
     public GroupRepository(NamedParameterJdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
     public GroupEntity findById(Long id) {
 
-        //log.info("Start find group for id {}", id);
+        log.info("Start find group for id {}", id);
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("id", id);
@@ -40,14 +45,14 @@ public class GroupRepository {
 
         GroupEntity group = jdbcTemplate.query(sql, parameters, mapper).get(0);
 
-        //log.info("Groups found: {} ", group.toString());
+        log.info("Groups found: {} ", group.toString());
 
         return group;
     }
 
     public void save(String name) {
 
-        //log.info("Start save group with name {}", name);
+        log.info("Start save group with name {}", name);
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("name", name);
@@ -63,13 +68,13 @@ public class GroupRepository {
 
         int saved = jdbcTemplate.update(sql, parameters);
 
-        //log.info("Groups saved: {} ", saved);
+        log.info("Groups saved: {} ", saved);
 
     }
 
     public List<UserModel> findByIdWithUsers(Long id) {
 
-        //log.info("Start find group and users for id_group {}", id);
+        log.info("Start find group and users for id_group {}", id);
 
         List<UserModel> group;
 
@@ -86,7 +91,7 @@ public class GroupRepository {
         String sql = "select user_name from users join user_group on user_id = \"user\" join groups on group_id = \"group\" where group_id = :id";
         group = jdbcTemplate.query(sql, parameters, mapper);
 
-        //log.info("Users found for group {}: {} ", id,  group.toString());
+        log.info("Users found for group {}: {} ", id, group.toString());
 
         return group;
 
