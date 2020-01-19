@@ -83,8 +83,9 @@ public class UserRepository {
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("user", userGroupModel.getUserId());
         parameters.addValue("group", userGroupModel.getGroupId());
+        parameters.addValue("creation", LocalDateTime.now());
 
-        String sql = "insert into user_group (\"user\", \"group\") VALUES (:user, :group)";
+        String sql = "insert into user_group (\"user\", \"group\", creation_date) VALUES (:user, :group, :creation)";
 
         int saved = jdbcTemplate.update(sql, parameters);
 

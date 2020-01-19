@@ -23,10 +23,11 @@ create table tokens
 
 create table groups
 (
-    group_id     bigserial
+    group_id      bigserial not null
         constraint groups_pk
             primary key,
-	group_name varchar
+    group_name    varchar,
+    creation_date timestamp
 );
 
 create table user_group
@@ -39,11 +40,13 @@ create table user_group
 		constraint user_group_groups_fk
 			references groups
 				on update cascade on delete cascade,
+	creation_date timestamp,
 	constraint user_group_pk
 		primary key ("user", "group")
 );
 
-
+create unique index group_group_name_uindex
+    on groups (group_name);
 
 create unique index users_access_name_uindex
     on users (access_name);
@@ -51,10 +54,10 @@ create unique index users_access_name_uindex
 create unique index group_group_name_uindex
     on groups (group_name);
 
-alter table tokens owner to postgres;
-
 alter table users owner to postgres;
 
 alter table groups owner to postgres;
 
 alter table user_group owner to postgres;
+
+alter table tokens owner to postgres;

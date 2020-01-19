@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -50,6 +51,7 @@ public class GroupRepository {
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("name", name);
+        parameters.addValue("creation", LocalDateTime.now());
 
         RowMapper<GroupEntity> mapper = (rs, rowNum) -> {
             GroupEntity group = new GroupEntity();
@@ -57,7 +59,7 @@ public class GroupRepository {
             return group;
         };
 
-        String sql = "insert into groups (group_name) values (:name)";
+        String sql = "insert into groups (group_name, creation_date) values (:name, :creation)";
 
         int saved = jdbcTemplate.update(sql, parameters);
 

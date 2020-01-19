@@ -8,7 +8,7 @@ body {
     -webkit-background-size: cover;
     background-size: cover;
     height: 100vh;
-    filter: blur(3px);
+    filter: blur(2px);
 }
 
 .login-container {
