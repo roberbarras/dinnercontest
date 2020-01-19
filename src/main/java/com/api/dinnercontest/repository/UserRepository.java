@@ -90,7 +90,7 @@ public class UserRepository {
         parameters.addValue("group", userGroupModel.getGroupId());
         parameters.addValue("creation", LocalDateTime.now());
 
-        String sql = "insert into user_group (\"user\", \"group\", creation_date) VALUES (:user, :group, :creation)";
+        String sql = "insert into user_group (\"user\", \"group\", creation_date, valid) VALUES (:user, :group, :creation, true)";
 
         int saved = jdbcTemplate.update(sql, parameters);
 
@@ -107,5 +107,21 @@ public class UserRepository {
 
         return this.jdbcTemplate.queryForObject(sql, parameters, Integer.class);
 
+    }
+
+    public void disjoin(UserGroupModel userGroupModel) {
+
+        log.info("Start disjoining group");
+
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("user", userGroupModel.getUserId());
+        parameters.addValue("group", userGroupModel.getGroupId());
+        parameters.addValue("removalDate", LocalDateTime.now());
+
+        String sql = "UPDATE user_group SET removal_date = :removalDate, valid = false WHERE \"user\" = :user AND \"group\" = :group";
+
+        this.jdbcTemplate.update(sql, parameters);
+
+        log.info("User disjoined: {} ", userGroupModel);
     }
 }

@@ -30,4 +30,8 @@ public class UserService {
     public boolean isUsed(String user) {
         return userRepository.isUsed(user) > 0;
     }
+
+    public void disjoinGroup(UserGroupModel userGroupModel) {
+        userRepository.disjoin(userGroupModel);
+    }
 }

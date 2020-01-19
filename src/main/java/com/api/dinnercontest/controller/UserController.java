@@ -58,4 +58,13 @@ public class UserController {
         httpHeaders.setLocation(ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand().toUri());
         return new ResponseEntity<>(userGroupModel, httpHeaders, HttpStatus.CREATED);
     }
+
+    @PostMapping("/disjoin-group")
+    public ResponseEntity disjoinGroup(HttpServletRequest request, @RequestBody UserGroupModel userGroupModel) {
+        log.info("[REQUEST RECEIVED    -    POST    /disjoin-group    user {} disjoined group {}]", userGroupModel.getUserId(), userGroupModel.getGroupId());
+        userService.disjoinGroup(userGroupModel);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setLocation(ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand().toUri());
+        return new ResponseEntity<>(userGroupModel, httpHeaders, HttpStatus.OK);
+    }
 }

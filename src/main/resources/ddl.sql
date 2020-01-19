@@ -32,15 +32,17 @@ create table groups
 
 create table user_group
 (
-	"user" bigserial
+	"user" bigserial not null
 		constraint user_group_users_fk
 			references users
 				on update cascade on delete cascade,
-	"group" bigserial
+	"group" bigserial not null
 		constraint user_group_groups_fk
 			references groups
 				on update cascade on delete cascade,
 	creation_date timestamp,
+	removal_date timestamp,
+	valid boolean,
 	constraint user_group_pk
 		primary key ("user", "group")
 );
