@@ -44,7 +44,7 @@ function registrar() {
         });
     } else {
         var request = new XMLHttpRequest();
-        request.open("POST", "https://dinnercontest.herokuapp.com/api/user");
+        request.open("POST", "http://localhost:8080/api/user");
         request.setRequestHeader("Content-Type", "application/json");
         request.send(JSON.stringify(user));
 
@@ -73,7 +73,7 @@ function registrar() {
 
 function exist() {
     var request = new XMLHttpRequest();
-    request.open("GET", "https://dinnercontest.herokuapp.com/api/user/exist/" + document.getElementById("register_access_input").value);
+    request.open("GET", "http://localhost:8080/api/user?name=" + document.getElementById("register_access_input").value);
     request.send();
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200 && this.responseText == 'true') {
@@ -98,11 +98,16 @@ function login() {
 
     }
 
+    class Token {
+        constructor(token) {
+            this.token = token;
+        }
+    }
+
     var login = new Login(document.getElementById("login_access_input").value,
         document.getElementById("login_password_input").value);
 
     var request = new XMLHttpRequest();
-
 
     request.onload = function () {
         if (request.readyState == 4 && request.status == 201) {
@@ -113,6 +118,12 @@ function login() {
                 button: false,
                 timer: 1000
             });
+            location.href = "/app.html";
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            const token = JSON.parse(request.responseText);
+            localStorage.setItem("token", token.token);
+            localStorage.setItem("user", login.accessName);
         }
         if (request.readyState == 4 && (request.status >= 400)) {
             swal.close();
@@ -129,7 +140,7 @@ function login() {
             title: 'Ha habido un problema, inténtelo más tarde'
         });
     };
-    request.open("POST", "https://dinnercontest.herokuapp.com/api/login", true);
+    request.open("POST", "http://localhost:8080/api/login", true);
     request.setRequestHeader("Content-Type", "application/json");
     swal("cargando", " ", {
         title: 'Cargando',

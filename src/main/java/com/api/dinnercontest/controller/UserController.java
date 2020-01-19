@@ -31,10 +31,10 @@ public class UserController {
         return new ResponseEntity<>(userService.getUser(id), HttpStatus.OK);
     }
 
-    @GetMapping("/user/exist/{user}")
-    public ResponseEntity isUsed(@PathVariable(value = "user") String user) {
-        //log.info("[REQUEST RECEIVED    -    GET    /user/{}]", user);
-        return ResponseEntity.ok().body(userService.isUsed(user));
+    @GetMapping("/user")
+    public ResponseEntity isUsed(@RequestParam String name) {
+        //log.info("[REQUEST RECEIVED    -    GET    /user]", user);
+        return ResponseEntity.ok().body(userService.isUsed(name));
     }
 
     @PostMapping("/user")
