@@ -70,6 +70,20 @@ create table group_category
 		primary key (id_group, id_category)
 );
 
+create table restaurant
+(
+	id_restaurant bigserial not null
+		constraint restaurant_pk
+			primary key,
+	name varchar not null,
+	host bigserial
+		constraint restaurant__fk
+			references users,
+	date timestamp,
+	address varchar,
+	photo varchar
+);
+
 create unique index group_group_name_uindex
     on groups (group_name);
 
