@@ -83,8 +83,13 @@ create table restaurant
 	address varchar,
 	photo varchar,
 	visible boolean default true not null,
-	creation_date timestamp
+	creation_date timestamp,
+	visible_date timestamp
 );
+
+alter table restaurant owner to postgres;
+
+
 
 create unique index group_group_name_uindex
     on groups (group_name);

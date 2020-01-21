@@ -36,9 +36,10 @@ public class RestaurantRepository {
         parameters.addValue("photo", restaurantModel.getPhoto());
         parameters.addValue("visible", restaurantModel.isVisible());
         parameters.addValue("creation_date", LocalDateTime.now());
+        parameters.addValue("visible_date", restaurantModel.getVisibleDate());
 
-        String sql = "insert into restaurant (name, host, date, address, photo, visible, creation_date) " +
-                "values (:name, :host, :date, :address, :photo, :visible, :creation_date)";
+        String sql = "insert into restaurant (name, host, date, address, photo, visible, creation_date, visible_date) " +
+                "values (:name, :host, :date, :address, :photo, :visible, :creation_date, :visible_date)";
 
         this.jdbcTemplate.update(sql, parameters);
 

@@ -20,6 +20,8 @@ public class RestaurantModel {
 
     private LocalDateTime creationDate;
 
+    private LocalDateTime visibleDate;
+
     public long getRestaurantId() {
         return restaurantId;
     }
@@ -84,6 +86,14 @@ public class RestaurantModel {
         this.creationDate = creationDate;
     }
 
+    public LocalDateTime getVisibleDate() {
+        return visibleDate;
+    }
+
+    public void setVisibleDate(LocalDateTime visibleDate) {
+        this.visibleDate = visibleDate;
+    }
+
     public RestaurantModel() {
     }
 
@@ -98,6 +108,7 @@ public class RestaurantModel {
                 ", photo='" + photo + '\'' +
                 ", visible=" + visible +
                 ", creationDate=" + creationDate +
+                ", visibleDate=" + visibleDate +
                 '}';
     }
 }
