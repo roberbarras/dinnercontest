@@ -16,6 +16,10 @@ public class RestaurantModel {
 
     private String photo;
 
+    private boolean visible;
+
+    private LocalDateTime creationDate;
+
     public long getRestaurantId() {
         return restaurantId;
     }
@@ -64,6 +68,22 @@ public class RestaurantModel {
         this.photo = photo;
     }
 
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+
     public RestaurantModel() {
     }
 
@@ -76,6 +96,8 @@ public class RestaurantModel {
                 ", date=" + date +
                 ", address='" + address + '\'' +
                 ", photo='" + photo + '\'' +
+                ", visible=" + visible +
+                ", creationDate=" + creationDate +
                 '}';
     }
 }

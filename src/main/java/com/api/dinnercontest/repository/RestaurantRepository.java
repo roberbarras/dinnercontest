@@ -9,6 +9,9 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
+import java.util.Optional;
+
 @Repository
 public class RestaurantRepository {
 
@@ -28,11 +31,14 @@ public class RestaurantRepository {
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("name", restaurantModel.getName());
         parameters.addValue("host", restaurantModel.getHost());
-        parameters.addValue("date", restaurantModel.getDate());
+        parameters.addValue("date", Optional.ofNullable(restaurantModel.getDate()).orElse(LocalDateTime.now()));
         parameters.addValue("address", restaurantModel.getAddress());
         parameters.addValue("photo", restaurantModel.getPhoto());
+        parameters.addValue("visible", restaurantModel.isVisible());
+        parameters.addValue("creation_date", LocalDateTime.now());
 
-        String sql = "insert into restaurant (name, host, date, address, photo) values (:name, :host, :date, :address, :photo)";
+        String sql = "insert into restaurant (name, host, date, address, photo, visible, creation_date) " +
+                "values (:name, :host, :date, :address, :photo, :visible, :creation_date)";
 
         this.jdbcTemplate.update(sql, parameters);
 
