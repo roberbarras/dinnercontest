@@ -70,14 +70,28 @@ create table group_category
 		primary key (id_group, id_category)
 );
 
+create table restaurant
+(
+	id_restaurant bigserial not null
+		constraint restaurant_pk
+			primary key,
+	name varchar not null,
+	host bigserial not null
+		constraint restaurant__fk
+			references users,
+	date timestamp,
+	address varchar,
+	photo varchar,
+	visible boolean default true not null,
+	creation_date timestamp,
+	visible_date timestamp
+);
+
 create unique index group_group_name_uindex
     on groups (group_name);
 
 create unique index users_access_name_uindex
     on users (access_name);
-
-create unique index group_group_name_uindex
-    on groups (group_name);
 
 alter table users owner to postgres;
 
@@ -86,3 +100,5 @@ alter table groups owner to postgres;
 alter table user_group owner to postgres;
 
 alter table tokens owner to postgres;
+
+alter table restaurant owner to postgres;

@@ -34,7 +34,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity login(HttpServletRequest request, @RequestBody LoginModel loginModel) {
+    public ResponseEntity<TokenModel> login(HttpServletRequest request, @RequestBody LoginModel loginModel) {
         log.info("[REQUEST RECEIVED    -    POST    /login    {}]", loginModel.getAccessName());
         if (loginService.accessSuccesful(loginModel)) {
             TokenModel tokenModel = new TokenModel();
@@ -48,7 +48,7 @@ public class LoginController {
     }
 
     @PostMapping("/check-token")
-    public ResponseEntity checkToken(HttpServletRequest request, @RequestBody UserTokenModel userTokenModel) {
+    public ResponseEntity<HttpStatus> checkToken(HttpServletRequest request, @RequestBody UserTokenModel userTokenModel) {
         log.info("[REQUEST RECEIVED    -    POST    /user    {}]", userTokenModel.getAccessName());
         if (loginService.checkToken(userTokenModel)) {
             return new ResponseEntity<>(HttpStatus.OK);

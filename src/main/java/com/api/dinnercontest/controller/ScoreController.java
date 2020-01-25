@@ -28,7 +28,7 @@ public class ScoreController {
     }
 
     @PostMapping("/category")
-    public ResponseEntity postCategory(@RequestBody CategoryModel categoryModel) {
+    public ResponseEntity<CategoryModel> postCategory(@RequestBody CategoryModel categoryModel) {
         log.info("[REQUEST RECEIVED    -    POST    /category    {}]", categoryModel.getCategoryName());
         scoreService.saveCategory(categoryModel);
         return new ResponseEntity<>(categoryModel, HttpStatus.CREATED);
