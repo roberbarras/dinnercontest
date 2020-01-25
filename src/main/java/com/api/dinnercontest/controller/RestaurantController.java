@@ -32,7 +32,7 @@ public class RestaurantController {
     }
 
     @PostMapping("/restaurant")
-    public ResponseEntity postRestaurant(HttpServletRequest request, @RequestBody RestaurantModel restaurantModel) {
+    public ResponseEntity<RestaurantModel> postRestaurant(HttpServletRequest request, @RequestBody RestaurantModel restaurantModel) {
         log.info("[REQUEST RECEIVED    -    POST    /restaurant    {}]", restaurantModel.getName());
         restaurantService.saveRestaurant(restaurantModel);
         HttpHeaders httpHeaders = new HttpHeaders();

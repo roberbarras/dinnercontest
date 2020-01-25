@@ -87,10 +87,6 @@ create table restaurant
 	visible_date timestamp
 );
 
-alter table restaurant owner to postgres;
-
-
-
 create unique index group_group_name_uindex
     on groups (group_name);
 

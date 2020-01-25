@@ -2,6 +2,7 @@ package com.api.dinnercontest.controller;
 
 import com.api.dinnercontest.model.GroupCategoryModel;
 import com.api.dinnercontest.model.GroupModel;
+import com.api.dinnercontest.model.UserModel;
 import com.api.dinnercontest.service.GroupService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -30,19 +32,19 @@ public class GroupController {
     }
 
     @GetMapping("/group/{id}")
-    public ResponseEntity getGroup(HttpServletRequest request, @PathVariable(value = "id") Long id) {
+    public ResponseEntity<GroupModel> getGroup(HttpServletRequest request, @PathVariable(value = "id") Long id) {
         log.info("[REQUEST RECEIVED    -    GET    /group/{}]", id);
         return new ResponseEntity<>(groupService.getGroup(id), HttpStatus.OK);
     }
 
     @GetMapping("/group-users/{id}")
-    public ResponseEntity getGroupUsers(HttpServletRequest request, @PathVariable(value = "id") Long id) {
+    public ResponseEntity<List<UserModel>> getGroupUsers(HttpServletRequest request, @PathVariable(value = "id") Long id) {
         log.info("[REQUEST RECEIVED    -    GET    /group-users/{}]", id);
         return new ResponseEntity<>(groupService.getGroupUsers(id), HttpStatus.OK);
     }
 
     @PostMapping("/group")
-    public ResponseEntity postGroup(HttpServletRequest request, @RequestBody GroupModel groupModel) {
+    public ResponseEntity<GroupModel> postGroup(HttpServletRequest request, @RequestBody GroupModel groupModel) {
         log.info("[REQUEST RECEIVED    -    POST    /group    {}]", groupModel.getGroupName());
         groupService.save(groupModel);
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -51,7 +53,7 @@ public class GroupController {
     }
 
     @PostMapping("/group-categories")
-    public ResponseEntity postGroupCategories(@RequestBody GroupCategoryModel groupCategoryModel) {
+    public ResponseEntity<GroupCategoryModel> postGroupCategories(@RequestBody GroupCategoryModel groupCategoryModel) {
         log.info("[REQUEST RECEIVED    -    POST    /group-categories]");
         groupService.saveCategory(groupCategoryModel);
         return new ResponseEntity<>(groupCategoryModel, HttpStatus.CREATED);
