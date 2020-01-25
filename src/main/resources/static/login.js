@@ -1,3 +1,7 @@
+const url = "https://dinnercontest.herokuapp.com";
+
+//const url = "http://localhost:8080";
+
 function registrar() {
 
     var inicioErrorVarios = "Los campos";
@@ -44,7 +48,7 @@ function registrar() {
         });
     } else {
         var request = new XMLHttpRequest();
-        request.open("POST", "http://localhost:8080/api/user");
+        request.open("POST", url + "/api/user");
         request.setRequestHeader("Content-Type", "application/json");
         request.send(JSON.stringify(user));
 
@@ -73,7 +77,7 @@ function registrar() {
 
 function exist() {
     var request = new XMLHttpRequest();
-    request.open("GET", "http://localhost:8080/api/user?name=" + document.getElementById("register_access_input").value);
+    request.open("GET", url + "/api/user?name=" + document.getElementById("register_access_input").value);
     request.send();
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200 && this.responseText == 'true') {
@@ -140,7 +144,7 @@ function login() {
             title: 'Ha habido un problema, inténtelo más tarde'
         });
     };
-    request.open("POST", "http://localhost:8080/api/login", true);
+    request.open("POST", url + "/api/login", true);
     request.setRequestHeader("Content-Type", "application/json");
     swal("cargando", " ", {
         title: 'Cargando',
