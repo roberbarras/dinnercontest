@@ -8,6 +8,8 @@ public class GroupModel {
 
     private String groupName;
 
+    private String secretToken;
+
     private LocalDateTime creationDate;
 
     public Long getGroupId() {
@@ -34,12 +36,14 @@ public class GroupModel {
         this.creationDate = creationDate;
     }
 
-    @Override
-    public String toString() {
-        return "GroupModel{" +
-                "groupId=" + groupId +
-                ", groupName='" + groupName + '\'' +
-                ", creationDate=" + creationDate +
-                '}';
+    public String getSecretToken() {
+        return secretToken;
+    }
+
+    public void setSecretToken(String secretToken) {
+        this.secretToken = secretToken;
+    }
+
+    public GroupModel() {
     }
 }

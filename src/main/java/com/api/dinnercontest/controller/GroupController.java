@@ -4,6 +4,7 @@ import com.api.dinnercontest.model.GroupCategoryModel;
 import com.api.dinnercontest.model.GroupModel;
 import com.api.dinnercontest.model.UserModel;
 import com.api.dinnercontest.service.GroupService;
+import com.api.dinnercontest.service.NotificationService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,8 @@ import java.util.List;
 public class GroupController {
 
     private GroupService groupService;
+
+    private NotificationService notificationService;
 
     private static final Logger log = LoggerFactory.getLogger(GroupController.class);
 

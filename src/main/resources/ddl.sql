@@ -56,7 +56,7 @@ create table category
 	weighing int not null
 );
 
-create table group_category
+create table group_categories
 (
 	id_group bigserial
 		constraint group_category_groups_group_id_fk
@@ -70,7 +70,7 @@ create table group_category
 		primary key (id_group, id_category)
 );
 
-create table restaurant
+create table restaurants
 (
 	id_restaurant bigserial not null
 		constraint restaurant_pk
@@ -85,6 +85,25 @@ create table restaurant
 	visible boolean default true not null,
 	creation_date timestamp,
 	visible_date timestamp
+);
+
+create table actions
+(
+	action_id bigserial not null
+		constraint actions_pk
+			primary key,
+	title varchar not null,
+	message varchar not null
+);
+
+create table notification
+(
+	notification_id bigserial not null
+		constraint notification_pk
+			primary key,
+	owner_group bigserial not null,
+	title varchar not null,
+	message varchar not null
 );
 
 create unique index group_group_name_uindex
@@ -102,3 +121,5 @@ alter table user_group owner to postgres;
 alter table tokens owner to postgres;
 
 alter table restaurant owner to postgres;
+
+alter table actions owner to postgres;
