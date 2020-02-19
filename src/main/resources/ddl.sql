@@ -77,8 +77,11 @@ create table restaurants
 			primary key,
 	name varchar not null,
 	host bigserial not null
-		constraint restaurant__fk
+		constraint restaurant_users_fk
 			references users,
+	id_group bigserial not null
+		constraint restaurant_group_fk
+			references groups,
 	date timestamp,
 	address varchar,
 	photo varchar,

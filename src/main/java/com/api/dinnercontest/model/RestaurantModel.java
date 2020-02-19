@@ -10,6 +10,8 @@ public class RestaurantModel {
 
     private long host;
 
+    private long group;
+
     private LocalDateTime date;
 
     private String address;
@@ -44,6 +46,14 @@ public class RestaurantModel {
 
     public void setHost(long host) {
         this.host = host;
+    }
+
+    public long getGroup() {
+        return group;
+    }
+
+    public void setGroup(long group) {
+        this.group = group;
     }
 
     public LocalDateTime getDate() {
@@ -103,6 +113,7 @@ public class RestaurantModel {
                 "restaurantId=" + restaurantId +
                 ", name='" + name + '\'' +
                 ", host=" + host +
+                ", group=" + group +
                 ", date=" + date +
                 ", address='" + address + '\'' +
                 ", photo='" + photo + '\'' +
