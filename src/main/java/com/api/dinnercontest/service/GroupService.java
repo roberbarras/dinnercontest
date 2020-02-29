@@ -30,4 +30,8 @@ public class GroupService {
     public void saveCategory(GroupCategoryModel groupCategoryModel) {
         groupRepository.saveCategory(groupCategoryModel);
     }
+
+    public List<Long> getCategories(Long group) {
+        return groupRepository.getCategories(group);
+    }
 }

@@ -112,4 +112,22 @@ public class GroupRepository {
 
         log.info("Category group relation saved");
     }
+
+    public List<Long> getCategories(Long group) {
+
+        log.info("Start find categories of group {}", group);
+
+        List<Long> categories;
+
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("group", group);
+
+
+        String sql = "select id_category from group_category where id_group = :group";
+        categories = jdbcTemplate.queryForList(sql, parameters, Long.class);
+
+        log.info("Categories found for group {}", group);
+
+        return categories;
+    }
 }

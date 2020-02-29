@@ -61,4 +61,10 @@ public class GroupController {
         groupService.saveCategory(groupCategoryModel);
         return new ResponseEntity<>(groupCategoryModel, HttpStatus.CREATED);
     }
+
+    @GetMapping("/group-categories/{group}")
+    public ResponseEntity<List<Long>> getGroupCategories(@PathVariable(value = "group") Long group) {
+        log.info("[REQUEST RECEIVED    -    GET    /group-categories]");
+        return ResponseEntity.ok(groupService.getCategories(group));
+    }
 }
