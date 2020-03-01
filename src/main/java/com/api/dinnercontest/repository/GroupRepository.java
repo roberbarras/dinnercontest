@@ -1,6 +1,7 @@
 package com.api.dinnercontest.repository;
 
 import com.api.dinnercontest.controller.LoginController;
+import com.api.dinnercontest.model.CategoryModel;
 import com.api.dinnercontest.model.GroupCategoryModel;
 import com.api.dinnercontest.model.GroupModel;
 import com.api.dinnercontest.model.UserModel;
@@ -113,9 +114,9 @@ public class GroupRepository {
         log.info("Category group relation saved");
     }
 
-    public List<Long> getCategories(Long group) {
+    public List<Long> getIdCategories(Long group) {
 
-        log.info("Start find categories of group {}", group);
+        log.info("Start find id categories of group {}", group);
 
         List<Long> categories;
 
@@ -127,6 +128,34 @@ public class GroupRepository {
         categories = jdbcTemplate.queryForList(sql, parameters, Long.class);
 
         log.info("Categories found for group {}", group);
+
+        return categories;
+    }
+
+    public List<CategoryModel> getCategories(Long group) {
+
+        log.info("Start find categories of group {}", group);
+
+        List<CategoryModel> categories;
+
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("group", group);
+
+        RowMapper<CategoryModel> mapper = (rs, rowNum) -> {
+            CategoryModel categoryModel = new CategoryModel();
+            categoryModel.setCategoryName(rs.getString("category_name"));
+            categoryModel.setWeighing(rs.getInt("weighing"));
+            return categoryModel;
+        };
+
+        String sql = "select category_name, weighing " +
+                "from group_category inner join category " +
+                "on category.id_category = group_category.id_category " +
+                "where id_group = :group " +
+                "order by weighing desc";
+        categories = jdbcTemplate.query(sql, parameters, mapper);
+
+        log.info("Categories found for group {}: {}", group, categories.toArray());
 
         return categories;
     }

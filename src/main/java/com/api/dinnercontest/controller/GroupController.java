@@ -1,5 +1,6 @@
 package com.api.dinnercontest.controller;
 
+import com.api.dinnercontest.model.CategoryModel;
 import com.api.dinnercontest.model.GroupCategoryModel;
 import com.api.dinnercontest.model.GroupModel;
 import com.api.dinnercontest.model.UserModel;
@@ -62,8 +63,14 @@ public class GroupController {
         return new ResponseEntity<>(groupCategoryModel, HttpStatus.CREATED);
     }
 
+    @GetMapping("/group-id-categories/{group}")
+    public ResponseEntity<List<Long>> getGroupIdCategories(@PathVariable(value = "group") Long group) {
+        log.info("[REQUEST RECEIVED    -    GET    /group-id-categories]");
+        return ResponseEntity.ok(groupService.getIdCategories(group));
+    }
+
     @GetMapping("/group-categories/{group}")
-    public ResponseEntity<List<Long>> getGroupCategories(@PathVariable(value = "group") Long group) {
+    public ResponseEntity<List<CategoryModel>> getGroupCategories(@PathVariable(value = "group") Long group) {
         log.info("[REQUEST RECEIVED    -    GET    /group-categories]");
         return ResponseEntity.ok(groupService.getCategories(group));
     }

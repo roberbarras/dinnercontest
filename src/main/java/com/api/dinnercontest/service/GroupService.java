@@ -1,5 +1,6 @@
 package com.api.dinnercontest.service;
 
+import com.api.dinnercontest.model.CategoryModel;
 import com.api.dinnercontest.model.GroupCategoryModel;
 import com.api.dinnercontest.model.GroupModel;
 import com.api.dinnercontest.model.UserModel;
@@ -31,7 +32,13 @@ public class GroupService {
         groupRepository.saveCategory(groupCategoryModel);
     }
 
-    public List<Long> getCategories(Long group) {
+    public List<Long> getIdCategories(Long group) {
+        return groupRepository.getIdCategories(group);
+    }
+
+    public List<CategoryModel> getCategories(Long group) {
         return groupRepository.getCategories(group);
     }
+
+
 }
