@@ -2,6 +2,7 @@ package com.api.dinnercontest.controller;
 
 import com.api.dinnercontest.model.UserGroupModel;
 import com.api.dinnercontest.model.UserModel;
+import com.api.dinnercontest.service.LoginService;
 import com.api.dinnercontest.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -22,11 +23,14 @@ public class UserController {
 
     private UserService userService;
 
+    private LoginService loginService;
+
     private static final Logger log = LoggerFactory.getLogger(LoginController.class);
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, LoginService loginService) {
         this.userService = userService;
+        this.loginService = loginService;
     }
 
     @GetMapping("/user/{id}")
@@ -54,10 +58,15 @@ public class UserController {
     @PostMapping("/join-group")
     public ResponseEntity<UserGroupModel> joinGroup(HttpServletRequest request, @RequestBody UserGroupModel userGroupModel) {
         log.info("[REQUEST RECEIVED    -    POST    /join-group    user {} joined group {}]", userGroupModel.getUserId(), userGroupModel.getGroupId());
-        userService.joinGroup(userGroupModel);
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setLocation(ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand().toUri());
-        return new ResponseEntity<>(userGroupModel, httpHeaders, HttpStatus.CREATED);
+        if (loginService.checkIdToken(userGroupModel.getUserId(), userGroupModel.getToken())) {
+            userService.joinGroup(userGroupModel);
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.setLocation(ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand().toUri());
+            return new ResponseEntity<>(userGroupModel, httpHeaders, HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+
     }
 
     @PostMapping("/disjoin-group")

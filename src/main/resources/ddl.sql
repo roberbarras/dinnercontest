@@ -15,10 +15,11 @@ create table users
 
 create table tokens
 (
+    user_id     bigserial,
 	access_name varchar,
 	token varchar,
 	constraint tokens_pk
-		unique (access_name, token)
+		unique (user_id, token)
 );
 
 create table groups

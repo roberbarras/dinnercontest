@@ -3,6 +3,7 @@ package com.api.dinnercontest.service;
 import com.api.dinnercontest.model.LoginModel;
 import com.api.dinnercontest.model.UserTokenModel;
 import com.api.dinnercontest.repository.LoginRepository;
+import com.api.dinnercontest.repository.UserRepository;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,18 +16,25 @@ public class LoginService {
     @Autowired
     private LoginRepository loginRepository;
 
-    public boolean accessSuccesful(LoginModel loginModel) {
+    @Autowired
+    private UserRepository userRepository;
+
+    public boolean accessSuccessful(LoginModel loginModel) {
         return BCrypt.checkpw(loginModel.getPassword(), loginRepository.getEncodedPassword(loginModel.getAccessName()));
     }
 
-    public String setToken(String accessName) {
+    public String setToken(Long userId, String accessName) {
         String token = generateToken();
-        loginRepository.setToken(accessName, token);
+        loginRepository.setToken(userId, accessName, token);
         return token;
     }
 
     public boolean checkToken(UserTokenModel userTokenModel) {
         return loginRepository.checkToken(userTokenModel) > 0;
+    }
+
+    public boolean checkIdToken(Long userId, String token) {
+        return loginRepository.checkIdToken(userId, token) > 0;
     }
 
     public String generateToken() {
@@ -42,5 +50,9 @@ public class LoginService {
                 .toString();
 
         return generatedString;
+    }
+
+    public Long getUserId(String accessName) {
+        return userRepository.findId(accessName);
     }
 }

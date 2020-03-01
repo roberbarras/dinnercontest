@@ -6,6 +6,8 @@ public class UserGroupModel {
 
     private Long groupId;
 
+    private String token;
+
     public Long getUserId() {
         return userId;
     }
@@ -20,6 +22,14 @@ public class UserGroupModel {
 
     public void setGroupId(Long groupId) {
         this.groupId = groupId;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     @Override

@@ -27,6 +27,16 @@ public class UserRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    public Long findId(String accessName) {
+
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("accessName", accessName);
+
+        String sql = "select user_id from users where access_name = :accessName";
+
+        return this.jdbcTemplate.queryForObject(sql, parameters, Long.class);
+    }
+
     public UserModel findById(Long id) {
 
         log.info("Start find user for id {}", id);
