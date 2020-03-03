@@ -5,6 +5,7 @@ import com.api.dinnercontest.model.GroupCategoryModel;
 import com.api.dinnercontest.model.GroupModel;
 import com.api.dinnercontest.model.UserModel;
 import com.api.dinnercontest.service.GroupService;
+import com.api.dinnercontest.service.LoginService;
 import com.api.dinnercontest.service.NotificationService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -26,13 +27,17 @@ public class GroupController {
 
     private GroupService groupService;
 
+    private LoginService loginService;
+
     private NotificationService notificationService;
 
     private static final Logger log = LoggerFactory.getLogger(GroupController.class);
 
     @Autowired
-    public GroupController(GroupService groupService) {
+    public GroupController(GroupService groupService, LoginService loginService, NotificationService notificationService) {
         this.groupService = groupService;
+        this.loginService = loginService;
+        this.notificationService = notificationService;
     }
 
     @GetMapping("/group/{id}")
@@ -50,17 +55,26 @@ public class GroupController {
     @PostMapping("/group")
     public ResponseEntity<GroupModel> postGroup(HttpServletRequest request, @RequestBody GroupModel groupModel) {
         log.info("[REQUEST RECEIVED    -    POST    /group    {}]", groupModel.getGroupName());
-        groupService.save(groupModel);
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setLocation(ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand().toUri());
-        return new ResponseEntity<>(groupModel, httpHeaders, HttpStatus.CREATED);
+        if (loginService.checkIdToken(groupModel.getUserId(), groupModel.getToken())) {
+            groupService.save(groupModel);
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.setLocation(ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand().toUri());
+            return new ResponseEntity<>(groupModel, httpHeaders, HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+
     }
 
     @PostMapping("/group-categories")
     public ResponseEntity<GroupCategoryModel> postGroupCategories(@RequestBody GroupCategoryModel groupCategoryModel) {
         log.info("[REQUEST RECEIVED    -    POST    /group-categories]");
-        groupService.saveCategory(groupCategoryModel);
-        return new ResponseEntity<>(groupCategoryModel, HttpStatus.CREATED);
+        if (loginService.checkIdToken(groupCategoryModel.getUserId(), groupCategoryModel.getToken())) {
+            groupService.saveCategory(groupCategoryModel);
+            return new ResponseEntity<>(groupCategoryModel, HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
     }
 
     @GetMapping("/group-id-categories/{group}")

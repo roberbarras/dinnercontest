@@ -1,25 +1,25 @@
 package com.api.dinnercontest.model;
 
-public class GroupCategoryModel {
+public class GroupCategoryModel extends UserIdTokenModel {
 
-    private long idGroup;
+    private long groupId;
 
-    private long idCategory;
+    private long categoryId;
 
-    public long getIdGroup() {
-        return idGroup;
+    public long getGroupId() {
+        return groupId;
     }
 
-    public void setIdGroup(long idGroup) {
-        this.idGroup = idGroup;
+    public void setGroupId(long groupId) {
+        this.groupId = groupId;
     }
 
-    public long getIdCategory() {
-        return idCategory;
+    public long getCategoryId() {
+        return categoryId;
     }
 
-    public void setIdCategory(long idCategory) {
-        this.idCategory = idCategory;
+    public void setCategoryId(long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public GroupCategoryModel() {

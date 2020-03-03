@@ -24,8 +24,9 @@ public class ScoreRepository {
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("name", categoryModel.getCategoryName());
         parameters.addValue("weighing", categoryModel.getWeighing());
+        parameters.addValue("user", categoryModel.getUserId());
 
-        String sql = "insert into category (category_name, weighing) VALUES (:name, :weighing)";
+        String sql = "insert into category (category_name, weighing, user_id) VALUES (:name, :weighing, :user)";
 
         this.jdbcTemplate.update(sql, parameters);
 

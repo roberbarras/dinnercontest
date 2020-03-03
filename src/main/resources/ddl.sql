@@ -50,11 +50,14 @@ create table user_group
 
 create table category
 (
-	id_category bigserial
+	id_category bigserial not null
 		constraint category_pk
 			primary key,
 	category_name varchar not null,
-	weighing int not null
+	weighing integer not null,
+	user_id bigserial not null
+		constraint category_user_fk
+			references users
 );
 
 create table group_categories

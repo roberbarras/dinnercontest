@@ -104,10 +104,11 @@ public class GroupRepository {
         log.info("Start save Group Category");
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
-        parameters.addValue("group", groupCategoryModel.getIdGroup());
-        parameters.addValue("category", groupCategoryModel.getIdCategory());
+        parameters.addValue("group", groupCategoryModel.getGroupId());
+        parameters.addValue("category", groupCategoryModel.getCategoryId());
+        parameters.addValue("user", groupCategoryModel.getUserId());
 
-        String sql = "insert into group_category (id_group, id_category) values (:group, :category)";
+        String sql = "insert into group_category (id_group, id_category, user_id) values (:group, :category, :user)";
 
         this.jdbcTemplate.update(sql, parameters);
 

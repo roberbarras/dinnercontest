@@ -1,6 +1,6 @@
 package com.api.dinnercontest.model;
 
-public class CategoryModel {
+public class CategoryModel extends UserIdTokenModel {
 
     private Long categoryId;
 

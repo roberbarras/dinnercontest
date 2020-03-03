@@ -2,13 +2,11 @@ package com.api.dinnercontest.model;
 
 import java.time.LocalDateTime;
 
-public class GroupModel {
+public class GroupModel extends UserIdTokenModel {
 
     private Long groupId;
 
     private String groupName;
-
-    private String secretToken;
 
     private LocalDateTime creationDate;
 
@@ -34,14 +32,6 @@ public class GroupModel {
 
     public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
-    }
-
-    public String getSecretToken() {
-        return secretToken;
-    }
-
-    public void setSecretToken(String secretToken) {
-        this.secretToken = secretToken;
     }
 
     public GroupModel() {
