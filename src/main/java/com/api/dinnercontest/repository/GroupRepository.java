@@ -107,8 +107,9 @@ public class GroupRepository {
         parameters.addValue("group", groupCategoryModel.getGroupId());
         parameters.addValue("category", groupCategoryModel.getCategoryId());
         parameters.addValue("user", groupCategoryModel.getUserId());
+        parameters.addValue("date", LocalDateTime.now());
 
-        String sql = "insert into group_category (id_group, id_category, user_id) values (:group, :category, :user)";
+        String sql = "insert into group_category (id_group, id_category, user_id, creation_date) values (:group, :category, :user, :date)";
 
         this.jdbcTemplate.update(sql, parameters);
 

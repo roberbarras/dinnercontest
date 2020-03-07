@@ -10,6 +10,8 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
+
 @Repository
 public class LoginRepository {
 
@@ -51,8 +53,9 @@ public class LoginRepository {
         parameters.addValue("userId", userId);
         parameters.addValue("accessName", accessName);
         parameters.addValue("token", token);
+        parameters.addValue("date", LocalDateTime.now());
 
-        String sql = "insert into tokens (user_id, access_name, token) values (:userId, :accessName, :token)";
+        String sql = "insert into tokens (user_id, access_name, token, creation_date) values (:userId, :accessName, :token, :date)";
 
         this.jdbcTemplate.update(sql, parameters);
 

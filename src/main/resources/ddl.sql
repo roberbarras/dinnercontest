@@ -15,11 +15,12 @@ create table users
 
 create table tokens
 (
-    user_id     bigserial,
-	access_name varchar,
-	token varchar,
-	constraint tokens_pk
-		unique (user_id, token)
+    user_id       bigserial not null,
+    access_name   varchar,
+    token         varchar,
+    creation_date timestamp,
+    constraint tokens_pk
+        unique (user_id, token)
 );
 
 create table groups
@@ -50,28 +51,34 @@ create table user_group
 
 create table category
 (
-	id_category bigserial not null
-		constraint category_pk
-			primary key,
-	category_name varchar not null,
-	weighing integer not null,
-	user_id bigserial not null
-		constraint category_user_fk
-			references users
+    id_category   bigserial not null
+        constraint category_pk
+            primary key,
+    category_name varchar   not null,
+    weighing      integer   not null,
+    user_id       bigserial not null
+        constraint category_user_fk
+            references users,
+    creation_date timestamp
 );
 
-create table group_categories
+create table group_category
 (
-	id_group bigserial
-		constraint group_category_groups_group_id_fk
-			references groups
-				on update cascade on delete cascade,
-	id_category bigserial
-		constraint group_category_fk
-			references category
-				on update cascade on delete cascade,
-	constraint group_category_pk
-		primary key (id_group, id_category)
+    id_group      bigserial not null
+        constraint group_category_groups_group_id_fk
+            references groups
+            on update cascade on delete cascade,
+    id_category   bigserial not null
+        constraint group_category_fk
+            references category
+            on update cascade on delete cascade,
+    user_id       serial    not null
+        constraint group_category_user_fk
+            references users,
+    creation_date timestamp,
+    removal_date  timestamp,
+    constraint group_category_pk
+        primary key (id_group, id_category)
 );
 
 create table restaurants

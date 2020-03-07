@@ -10,6 +10,8 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
+
 @Repository
 public class ScoreRepository {
 
@@ -25,8 +27,9 @@ public class ScoreRepository {
         parameters.addValue("name", categoryModel.getCategoryName());
         parameters.addValue("weighing", categoryModel.getWeighing());
         parameters.addValue("user", categoryModel.getUserId());
+        parameters.addValue("date", LocalDateTime.now());
 
-        String sql = "insert into category (category_name, weighing, user_id) VALUES (:name, :weighing, :user)";
+        String sql = "insert into category (category_name, weighing, user_id, creation_date) VALUES (:name, :weighing, :user, :date)";
 
         this.jdbcTemplate.update(sql, parameters);
 
