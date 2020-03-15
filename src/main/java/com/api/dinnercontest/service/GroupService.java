@@ -40,5 +40,9 @@ public class GroupService {
         return groupRepository.getCategories(group);
     }
 
+    public boolean checkUserGroup(Long group, Long user) {
+        return groupRepository.checkUser(group, user);
+    }
+
 
 }
