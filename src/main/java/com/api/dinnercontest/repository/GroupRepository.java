@@ -145,12 +145,13 @@ public class GroupRepository {
 
         RowMapper<CategoryModel> mapper = (rs, rowNum) -> {
             CategoryModel categoryModel = new CategoryModel();
+            categoryModel.setCategoryId(rs.getLong("id_category"));
             categoryModel.setCategoryName(rs.getString("category_name"));
             categoryModel.setWeighing(rs.getInt("weighing"));
             return categoryModel;
         };
 
-        String sql = "select category_name, weighing " +
+        String sql = "select category.id_category, category.category_name, category.weighing " +
                 "from group_category inner join category " +
                 "on category.id_category = group_category.id_category " +
                 "where id_group = :group " +
