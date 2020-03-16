@@ -18,4 +18,8 @@ public class ScoreService {
     public void saveCategory(CategoryModel categoryModel) {
         scoreRepository.saveCategory(categoryModel);
     }
+
+    public CategoryModel getCategory(Long id) {
+        return scoreRepository.getCategory(id);
+    }
 }

@@ -10,6 +10,8 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
+
 @Repository
 public class LoginRepository {
 
@@ -43,15 +45,17 @@ public class LoginRepository {
         return password;
     }
 
-    public void setToken(String accessName, String token) {
+    public void setToken(Long userId, String accessName, String token) {
 
         log.debug("Start setToken for accessName {}", accessName);
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("userId", userId);
         parameters.addValue("accessName", accessName);
         parameters.addValue("token", token);
+        parameters.addValue("date", LocalDateTime.now());
 
-        String sql = "insert into tokens (access_name, token) values (:accessName, :token)";
+        String sql = "insert into tokens (user_id, access_name, token, creation_date) values (:userId, :accessName, :token, :date)";
 
         this.jdbcTemplate.update(sql, parameters);
 
@@ -67,7 +71,24 @@ public class LoginRepository {
         parameters.addValue("accessName", userTokenModel.getAccessName());
         parameters.addValue("token", userTokenModel.getToken());
 
-        String sql = "select count(*) from tokens t where t.access_name = :accessName and t.token = :token;";
+        String sql = "select count(*) from tokens t where t.access_name = :accessName and t.token = :token";
+
+        Integer results = this.jdbcTemplate.queryForObject(sql, parameters, Integer.class);
+
+        log.debug("results: {} ", results);
+
+        return results != null ? results.intValue() : 0;
+    }
+
+    public int checkIdToken(Long userId, String token) {
+
+        log.debug("Start checkToken for accessName {}", userId);
+
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("id", userId);
+        parameters.addValue("token", token);
+
+        String sql = "select count(*) from tokens t where t.user_id = :id and t.token = :token";
 
         Integer results = this.jdbcTemplate.queryForObject(sql, parameters, Integer.class);
 

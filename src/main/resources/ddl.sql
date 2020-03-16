@@ -15,10 +15,12 @@ create table users
 
 create table tokens
 (
-	access_name varchar,
-	token varchar,
-	constraint tokens_pk
-		unique (access_name, token)
+    user_id       bigserial not null,
+    access_name   varchar,
+    token         varchar,
+    creation_date timestamp,
+    constraint tokens_pk
+        unique (user_id, token)
 );
 
 create table groups
@@ -49,42 +51,73 @@ create table user_group
 
 create table category
 (
-	id_category bigserial
-		constraint category_pk
-			primary key,
-	category_name varchar not null,
-	weighing int not null
+    id_category   bigserial not null
+        constraint category_pk
+            primary key,
+    category_name varchar   not null,
+    weighing      integer   not null,
+    user_id       bigserial not null
+        constraint category_user_fk
+            references users,
+    creation_date timestamp
 );
 
 create table group_category
 (
-	id_group bigserial
-		constraint group_category_groups_group_id_fk
-			references groups
-				on update cascade on delete cascade,
-	id_category bigserial
-		constraint group_category_fk
-			references category
-				on update cascade on delete cascade,
-	constraint group_category_pk
-		primary key (id_group, id_category)
+    id_group      bigserial not null
+        constraint group_category_groups_group_id_fk
+            references groups
+            on update cascade on delete cascade,
+    id_category   bigserial not null
+        constraint group_category_fk
+            references category
+            on update cascade on delete cascade,
+    user_id       serial    not null
+        constraint group_category_user_fk
+            references users,
+    creation_date timestamp,
+    removal_date  timestamp,
+    constraint group_category_pk
+        primary key (id_group, id_category)
 );
 
-create table restaurant
+create table restaurants
 (
 	id_restaurant bigserial not null
 		constraint restaurant_pk
 			primary key,
 	name varchar not null,
 	host bigserial not null
-		constraint restaurant__fk
+		constraint restaurant_users_fk
 			references users,
+	id_group bigserial not null
+		constraint restaurant_group_fk
+			references groups,
 	date timestamp,
 	address varchar,
 	photo varchar,
 	visible boolean default true not null,
 	creation_date timestamp,
 	visible_date timestamp
+);
+
+create table actions
+(
+	action_id bigserial not null
+		constraint actions_pk
+			primary key,
+	title varchar not null,
+	message varchar not null
+);
+
+create table notification
+(
+	notification_id bigserial not null
+		constraint notification_pk
+			primary key,
+	owner_group bigserial not null,
+	title varchar not null,
+	message varchar not null
 );
 
 create unique index group_group_name_uindex
@@ -102,3 +135,5 @@ alter table user_group owner to postgres;
 alter table tokens owner to postgres;
 
 alter table restaurant owner to postgres;
+
+alter table actions owner to postgres;

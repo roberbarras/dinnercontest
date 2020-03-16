@@ -36,11 +36,12 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseEntity<TokenModel> login(HttpServletRequest request, @RequestBody LoginModel loginModel) {
         log.info("[REQUEST RECEIVED    -    POST    /login    {}]", loginModel.getAccessName());
-        if (loginService.accessSuccesful(loginModel)) {
+        loginModel.setUserId(loginService.getUserId(loginModel.getAccessName()));
+        if (loginService.accessSuccessful(loginModel)) {
             TokenModel tokenModel = new TokenModel();
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.setLocation(ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand().toUri());
-            tokenModel.setToken(loginService.setToken(loginModel.getAccessName()));
+            tokenModel.setToken(loginService.setToken(loginModel.getUserId(), loginModel.getAccessName()));
             return new ResponseEntity<>(tokenModel, httpHeaders, HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);

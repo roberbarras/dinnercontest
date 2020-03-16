@@ -14,4 +14,8 @@ public class RestaurantService {
     public void saveRestaurant(RestaurantModel restaurantModel) {
         restaurantRepository.saveRestaurant(restaurantModel);
     }
+
+    public RestaurantModel getRestaurant(Long id) {
+        return restaurantRepository.getRestaurant(id);
+    }
 }

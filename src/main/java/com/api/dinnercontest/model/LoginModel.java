@@ -2,11 +2,21 @@ package com.api.dinnercontest.model;
 
 public class LoginModel {
 
+    private Long userId;
+
     private String accessName;
 
     private String password;
 
     public LoginModel() {
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getAccessName() {

@@ -2,7 +2,7 @@ package com.api.dinnercontest.model;
 
 import java.time.LocalDateTime;
 
-public class GroupModel {
+public class GroupModel extends UserIdTokenModel {
 
     private Long groupId;
 
@@ -34,12 +34,6 @@ public class GroupModel {
         this.creationDate = creationDate;
     }
 
-    @Override
-    public String toString() {
-        return "GroupModel{" +
-                "groupId=" + groupId +
-                ", groupName='" + groupName + '\'' +
-                ", creationDate=" + creationDate +
-                '}';
+    public GroupModel() {
     }
 }
