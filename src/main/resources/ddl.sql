@@ -49,36 +49,22 @@ create table user_group
 		primary key ("user", "group")
 );
 
-create table category
+create table categories
 (
-    id_category   bigserial not null
+    category_id   bigserial not null
         constraint category_pk
             primary key,
+    group_id      bigserial not null
+        constraint group_category_groups_group_id_fk
+            references groups
+            on update cascade on delete cascade,
     category_name varchar   not null,
     weighing      integer   not null,
     user_id       bigserial not null
         constraint category_user_fk
             references users,
-    creation_date timestamp
-);
-
-create table group_category
-(
-    id_group      bigserial not null
-        constraint group_category_groups_group_id_fk
-            references groups
-            on update cascade on delete cascade,
-    id_category   bigserial not null
-        constraint group_category_fk
-            references category
-            on update cascade on delete cascade,
-    user_id       serial    not null
-        constraint group_category_user_fk
-            references users,
     creation_date timestamp,
-    removal_date  timestamp,
-    constraint group_category_pk
-        primary key (id_group, id_category)
+    removal_date  timestamp
 );
 
 create table restaurants

@@ -1,7 +1,6 @@
 package com.api.dinnercontest.controller;
 
 import com.api.dinnercontest.model.CategoryModel;
-import com.api.dinnercontest.model.GroupCategoryModel;
 import com.api.dinnercontest.model.GroupModel;
 import com.api.dinnercontest.model.UserModel;
 import com.api.dinnercontest.service.GroupService;
@@ -55,18 +54,6 @@ public class GroupController {
         if (loginService.checkIdToken(groupModel.getUserId(), groupModel.getToken())) {
             groupService.save(groupModel);
             return new ResponseEntity<>(groupModel, HttpStatus.CREATED);
-        } else {
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }
-
-    }
-
-    @PostMapping("/group-categories")
-    public ResponseEntity<GroupCategoryModel> postGroupCategories(@RequestBody GroupCategoryModel groupCategoryModel) {
-        log.info("[REQUEST RECEIVED    -    POST    /group-categories]");
-        if (loginService.checkIdToken(groupCategoryModel.getUserId(), groupCategoryModel.getToken())) {
-            groupService.saveCategory(groupCategoryModel);
-            return new ResponseEntity<>(groupCategoryModel, HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }

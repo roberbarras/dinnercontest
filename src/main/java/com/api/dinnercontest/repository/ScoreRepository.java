@@ -24,12 +24,13 @@ public class ScoreRepository {
         log.info("Start saving category {}", categoryModel.getCategoryName());
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("group", categoryModel.getGroupId());
         parameters.addValue("name", categoryModel.getCategoryName());
         parameters.addValue("weighing", categoryModel.getWeighing());
         parameters.addValue("user", categoryModel.getUserId());
         parameters.addValue("date", LocalDateTime.now());
 
-        String sql = "insert into category (category_name, weighing, user_id, creation_date) VALUES (:name, :weighing, :user, :date)";
+        String sql = "insert into categories (group_id, category_name, weighing, user_id, creation_date, removal_date) VALUES (:group, :name, :weighing, :user, :date, null)";
 
         this.jdbcTemplate.update(sql, parameters);
 
@@ -50,7 +51,7 @@ public class ScoreRepository {
             return category;
         };
 
-        String sql = "select category_name, weighing from category where id_category = :id";
+        String sql = "select category_name, weighing from categories where category_id = :id";
 
         CategoryModel categoryModel = this.jdbcTemplate.query(sql, parameters, mapper).get(0);
 
