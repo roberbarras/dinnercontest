@@ -38,13 +38,13 @@ public class GroupController {
 
     @GetMapping("/group/{id}")
     public ResponseEntity<GroupModel> getGroup(@PathVariable(value = "id") Long id) {
-        log.info("[REQUEST RECEIVED    -    GET    /group/{}]", id);
+        log.info("[REQUEST RECEIVED    -    GET     /group/{}]", id);
         return new ResponseEntity<>(groupService.getGroup(id), HttpStatus.OK);
     }
 
     @GetMapping("/group-users/{id}")
     public ResponseEntity<List<UserModel>> getGroupUsers(@PathVariable(value = "id") Long id) {
-        log.info("[REQUEST RECEIVED    -    GET    /group-users/{}]", id);
+        log.info("[REQUEST RECEIVED    -    GET     /group-users/{}]", id);
         return new ResponseEntity<>(groupService.getGroupUsers(id), HttpStatus.OK);
     }
 
@@ -61,13 +61,13 @@ public class GroupController {
 
     @GetMapping("/group-id-categories/{group}")
     public ResponseEntity<List<Long>> getGroupIdCategories(@PathVariable(value = "group") Long group) {
-        log.info("[REQUEST RECEIVED    -    GET    /group-id-categories]");
+        log.info("[REQUEST RECEIVED    -    GET     /group-id-categories]");
         return ResponseEntity.ok(groupService.getIdCategories(group));
     }
 
     @GetMapping("/group/{group}/categories")
     public ResponseEntity<List<CategoryModel>> getGroupCategories(@PathVariable(value = "group") Long group) {
-        log.info("[REQUEST RECEIVED    -    GET    /group-categories]");
+        log.info("[REQUEST RECEIVED    -    GET     /group-categories]");
         return ResponseEntity.ok(groupService.getCategories(group));
     }
 }

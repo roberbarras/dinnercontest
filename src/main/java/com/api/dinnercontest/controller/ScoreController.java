@@ -41,7 +41,7 @@ public class ScoreController {
 
     @GetMapping("/category/{id}")
     public ResponseEntity<CategoryModel> getCategory(@PathVariable(value = "id") Long id) {
-        log.info("[REQUEST RECEIVED    -    GET    /cagetory/{}", id);
+        log.info("[REQUEST RECEIVED    -    GET     /cagetory/{}", id);
         return ResponseEntity.ok(scoreService.getCategory(id));
     }
 }

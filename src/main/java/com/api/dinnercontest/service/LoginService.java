@@ -24,6 +24,7 @@ public class LoginService {
     }
 
     public String setToken(Long userId, String accessName) {
+        userRepository.updateLoginDate(userId);
         String token = generateToken();
         loginRepository.setToken(userId, accessName, token);
         return token;

@@ -46,7 +46,7 @@ public class RestaurantController {
 
     @GetMapping("/restaurant/{id}")
     public ResponseEntity<RestaurantModel> getRestaurant(@PathVariable(value = "id") Long id) {
-        log.info("[REQUEST RECEIVED    -    GET    /restaurant    {}]", id);
+        log.info("[REQUEST RECEIVED    -    GET     /restaurant    {}]", id);
         return ResponseEntity.ok(restaurantService.getRestaurant(id));
     }
 }

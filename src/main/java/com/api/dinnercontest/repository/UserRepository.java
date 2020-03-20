@@ -134,4 +134,20 @@ public class UserRepository {
 
         log.debug("User disjoined: {} ", userGroupModel);
     }
+
+    public void updateLoginDate(Long userId) {
+
+        log.debug("Updating last login date");
+
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("user", userId);
+        parameters.addValue("date", LocalDateTime.now());
+
+        String sql = "UPDATE users SET last_login = :date WHERE user_id = :user";
+
+        this.jdbcTemplate.update(sql, parameters);
+
+        log.debug("Last login date updated");
+
+    }
 }

@@ -35,13 +35,13 @@ public class UserController {
 
     @GetMapping("/user/{id}")
     public ResponseEntity<UserModel> getUser(HttpServletRequest request, @PathVariable(value = "id") Long id) {
-        log.info("[REQUEST RECEIVED    -    GET    /user/{}]", id);
+        log.info("[REQUEST RECEIVED    -    GET     /user/{}]", id);
         return new ResponseEntity<>(userService.getUser(id), HttpStatus.OK);
     }
 
     @GetMapping("/user")
     public ResponseEntity<Boolean> isUsed(@RequestParam String name) {
-        log.info("[REQUEST RECEIVED    -    GET    /user {}]", name);
+        log.info("[REQUEST RECEIVED    -    GET     /user {}]", name);
         return ResponseEntity.ok().body(userService.isUsed(name));
     }
 
