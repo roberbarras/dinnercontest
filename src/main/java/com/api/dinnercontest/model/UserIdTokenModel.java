@@ -1,9 +1,13 @@
 package com.api.dinnercontest.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class UserIdTokenModel {
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Long userId;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String token;
 
     public UserIdTokenModel() {

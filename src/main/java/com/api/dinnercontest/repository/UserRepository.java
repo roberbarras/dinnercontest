@@ -39,7 +39,7 @@ public class UserRepository {
 
     public UserModel findById(Long id) {
 
-        log.info("Start find user for id {}", id);
+        log.debug("Start find user for id {}", id);
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("id", id);
@@ -62,14 +62,14 @@ public class UserRepository {
 
         UserModel user = this.jdbcTemplate.query(sql, parameters, mapper).get(0);
 
-        log.info("User found: {} ", user.toString());
+        log.debug("User found: {} ", user.toString());
 
         return user;
     }
 
     public void save(UserModel userModel) {
 
-        log.info("Start save user with name {}", userModel.getAccessName());
+        log.debug("Start save user with name {}", userModel.getAccessName());
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("name", userModel.getUserName());
@@ -87,13 +87,13 @@ public class UserRepository {
 
         int saved = jdbcTemplate.update(sql, parameters);
 
-        log.info("Users saved: {} ", saved);
+        log.debug("Users saved: {} ", saved);
 
     }
 
     public void join(UserGroupModel userGroupModel) {
 
-        log.info("Start joining group");
+        log.debug("Start joining group");
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("user", userGroupModel.getUserId());
@@ -104,7 +104,7 @@ public class UserRepository {
 
         int saved = jdbcTemplate.update(sql, parameters);
 
-        log.info("User joined: {} ", userGroupModel);
+        log.debug("User joined: {} ", userGroupModel);
 
     }
 
@@ -121,7 +121,7 @@ public class UserRepository {
 
     public void disjoin(UserGroupModel userGroupModel) {
 
-        log.info("Start disjoining group");
+        log.debug("Start disjoining group");
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("user", userGroupModel.getUserId());
@@ -132,6 +132,6 @@ public class UserRepository {
 
         this.jdbcTemplate.update(sql, parameters);
 
-        log.info("User disjoined: {} ", userGroupModel);
+        log.debug("User disjoined: {} ", userGroupModel);
     }
 }

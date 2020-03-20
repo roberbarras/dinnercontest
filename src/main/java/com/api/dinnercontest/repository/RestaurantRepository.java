@@ -27,7 +27,7 @@ public class RestaurantRepository {
 
     public void saveRestaurant(RestaurantModel restaurantModel) {
 
-        log.info("Start save Restaurant");
+        log.debug("Start save Restaurant");
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("name", restaurantModel.getName());
@@ -45,11 +45,11 @@ public class RestaurantRepository {
 
         this.jdbcTemplate.update(sql, parameters);
 
-        log.info("Restaurant {} saved", restaurantModel.getName());
+        log.debug("Restaurant {} saved", restaurantModel.getName());
     }
 
     public RestaurantModel getRestaurant(Long id) {
-        log.info("Start find restaurant with id {}", id);
+        log.debug("Start find restaurant with id {}", id);
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("id", id);

@@ -1,19 +1,26 @@
 package com.api.dinnercontest.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import java.time.LocalDateTime;
 
 public class CategoryModel extends UserIdTokenModel {
 
     private Long categoryId;
 
+    @JsonProperty(access = Access.WRITE_ONLY)
     private Long groupId;
 
     private String categoryName;
 
     private int weighing;
 
+    @JsonIgnore
     private LocalDateTime creationDate;
 
+    @JsonIgnore
     private LocalDateTime removalDate;
 
     public Long getCategoryId() {

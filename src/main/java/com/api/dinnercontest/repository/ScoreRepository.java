@@ -21,7 +21,7 @@ public class ScoreRepository {
     private static final Logger log = LoggerFactory.getLogger(LoginController.class);
 
     public void saveCategory(CategoryModel categoryModel) {
-        log.info("Start saving category {}", categoryModel.getCategoryName());
+        log.debug("Start saving category {}", categoryModel.getCategoryName());
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("group", categoryModel.getGroupId());
@@ -34,11 +34,11 @@ public class ScoreRepository {
 
         this.jdbcTemplate.update(sql, parameters);
 
-        log.info("Category {} saved", categoryModel.getCategoryName());
+        log.debug("Category {} saved", categoryModel.getCategoryName());
     }
 
     public CategoryModel getCategory(Long id) {
-        log.info("Start getting category {}", id);
+        log.debug("Start getting category {}", id);
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("id", id);
@@ -55,9 +55,10 @@ public class ScoreRepository {
 
         CategoryModel categoryModel = this.jdbcTemplate.query(sql, parameters, mapper).get(0);
 
-        log.info("Category found: {} ", categoryModel.toString());
+        log.debug("Category found: {} ", categoryModel.toString());
 
         return categoryModel;
 
     }
+
 }

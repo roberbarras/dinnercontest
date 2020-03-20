@@ -117,33 +117,29 @@ public class GroupRepository {
         return categories;
     }
 
-    public List<CategoryModel> getCategories(Long group) {
-
-        log.debug("Start find categories of group {}", group);
-
-        List<CategoryModel> categories;
+    public List<CategoryModel> getCategories(Long groupId) {
+        log.debug("Start getting category for group {}", groupId);
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
-        parameters.addValue("group", group);
+        parameters.addValue("group", groupId);
+        parameters.addValue("date", LocalDateTime.now());
 
         RowMapper<CategoryModel> mapper = (rs, rowNum) -> {
-            CategoryModel categoryModel = new CategoryModel();
-            categoryModel.setCategoryId(rs.getLong("id_category"));
-            categoryModel.setCategoryName(rs.getString("category_name"));
-            categoryModel.setWeighing(rs.getInt("weighing"));
-            return categoryModel;
+            CategoryModel category = new CategoryModel();
+            category.setCategoryId(rs.getLong("category_id"));
+            category.setCategoryName(rs.getString("category_name"));
+            category.setWeighing(rs.getInt("weighing"));
+
+            return category;
         };
 
-        String sql = "select category.id_category, category.category_name, category.weighing " +
-                "from group_category inner join category " +
-                "on category.id_category = group_category.id_category " +
-                "where id_group = :group " +
-                "order by weighing desc";
-        categories = jdbcTemplate.query(sql, parameters, mapper);
+        String sql = "select * from categories where group_id = :group and removal_date is null or removal_date > :date order by weighing desc;";
 
-        log.debug("Categories found for group {}: {}", group, categories.toArray());
+        List<CategoryModel> categoryList = this.jdbcTemplate.query(sql, parameters, mapper);
 
-        return categories;
+        log.debug("Categories found: {} ", categoryList.size());
+
+        return categoryList;
     }
 
     public boolean checkUser(Long group, Long user) {

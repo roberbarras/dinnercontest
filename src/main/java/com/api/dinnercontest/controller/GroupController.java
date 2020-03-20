@@ -65,7 +65,7 @@ public class GroupController {
         return ResponseEntity.ok(groupService.getIdCategories(group));
     }
 
-    @GetMapping("/group-categories/{group}")
+    @GetMapping("/group/{group}/categories")
     public ResponseEntity<List<CategoryModel>> getGroupCategories(@PathVariable(value = "group") Long group) {
         log.info("[REQUEST RECEIVED    -    GET    /group-categories]");
         return ResponseEntity.ok(groupService.getCategories(group));
