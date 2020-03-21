@@ -91,12 +91,12 @@ public class UserRepository {
 
     }
 
-    public void join(UserGroupModel userGroupModel) {
+    public void join(UserGroupModel userGroupModel, long user) {
 
         log.debug("Start joining group");
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
-        parameters.addValue("user", userGroupModel.getUserId());
+        parameters.addValue("user", user);
         parameters.addValue("group", userGroupModel.getGroupId());
         parameters.addValue("creation", LocalDateTime.now());
 
@@ -119,12 +119,12 @@ public class UserRepository {
 
     }
 
-    public void disjoin(UserGroupModel userGroupModel) {
+    public void disjoin(UserGroupModel userGroupModel, long user) {
 
         log.debug("Start disjoining group");
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
-        parameters.addValue("user", userGroupModel.getUserId());
+        parameters.addValue("user", user);
         parameters.addValue("group", userGroupModel.getGroupId());
         parameters.addValue("removalDate", LocalDateTime.now());
 

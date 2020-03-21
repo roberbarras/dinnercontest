@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import java.time.LocalDateTime;
 
-public class CategoryModel extends UserIdTokenModel {
+public class CategoryModel {
 
     private Long categoryId;
 

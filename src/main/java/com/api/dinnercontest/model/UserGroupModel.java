@@ -1,6 +1,6 @@
 package com.api.dinnercontest.model;
 
-public class UserGroupModel extends UserIdTokenModel {
+public class UserGroupModel {
 
     private Long groupId;
 
@@ -14,9 +14,8 @@ public class UserGroupModel extends UserIdTokenModel {
 
     @Override
     public String toString() {
-        return "UserGroupModel { " +
-                " userId: " + super.getUserId() +
-                ", groupId: " + groupId +
-                " }";
+        return "UserGroupModel{" +
+                "groupId=" + groupId +
+                '}';
     }
 }

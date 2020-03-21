@@ -56,10 +56,13 @@ public class UserController {
     }
 
     @PostMapping("/join-group")
-    public ResponseEntity<UserGroupModel> joinGroup(HttpServletRequest request, @RequestBody UserGroupModel userGroupModel) {
-        log.info("[REQUEST RECEIVED    -    POST    /join-group    user {} joined group {}]", userGroupModel.getUserId(), userGroupModel.getGroupId());
-        if (loginService.checkIdToken(userGroupModel.getUserId(), userGroupModel.getToken())) {
-            userService.joinGroup(userGroupModel);
+    public ResponseEntity<UserGroupModel> joinGroup(
+            @RequestHeader(name = "user", required = false) Long user,
+            @RequestHeader(name = "token", required = false) String token,
+            HttpServletRequest request, @RequestBody UserGroupModel userGroupModel) {
+        log.info("[REQUEST RECEIVED    -    POST    /join-group    user {} joined group {}]", user, userGroupModel.getGroupId());
+        if (loginService.checkIdToken(user, token)) {
+            userService.joinGroup(userGroupModel, user);
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.setLocation(ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand().toUri());
             return new ResponseEntity<>(userGroupModel, httpHeaders, HttpStatus.CREATED);
@@ -70,9 +73,12 @@ public class UserController {
     }
 
     @PostMapping("/disjoin-group")
-    public ResponseEntity<UserGroupModel> disjoinGroup(HttpServletRequest request, @RequestBody UserGroupModel userGroupModel) {
-        log.info("[REQUEST RECEIVED    -    POST    /disjoin-group    user {} disjoined group {}]", userGroupModel.getUserId(), userGroupModel.getGroupId());
-        userService.disjoinGroup(userGroupModel);
+    public ResponseEntity<UserGroupModel> disjoinGroup(
+            @RequestHeader(name = "user", required = false) Long user,
+            @RequestHeader(name = "token", required = false) String token,
+            HttpServletRequest request, @RequestBody UserGroupModel userGroupModel) {
+        log.info("[REQUEST RECEIVED    -    POST    /disjoin-group    user {} disjoined group {}]", user, userGroupModel.getGroupId());
+        userService.disjoinGroup(userGroupModel, user);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setLocation(ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand().toUri());
         return new ResponseEntity<>(userGroupModel, httpHeaders, HttpStatus.OK);

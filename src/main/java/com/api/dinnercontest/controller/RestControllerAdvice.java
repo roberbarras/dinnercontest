@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.NoSuchElementException;
 
 @Slf4j
@@ -54,6 +55,13 @@ public class RestControllerAdvice {
 
     @ExceptionHandler(value = RowAlreadyExistException.class)
     public ResponseEntity<Object> exception(RowAlreadyExistException exception) {
+        log.error(exception.getLocalizedMessage());
+        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, exception.getLocalizedMessage(), exception.getMessage());
+        return new ResponseEntity(apiError, apiError.getStatus());
+    }
+
+    @ExceptionHandler(value = InvocationTargetException.class)
+    public ResponseEntity<Object> exception(InvocationTargetException exception) {
         log.error(exception.getLocalizedMessage());
         ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, exception.getLocalizedMessage(), exception.getMessage());
         return new ResponseEntity(apiError, apiError.getStatus());

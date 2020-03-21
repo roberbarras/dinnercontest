@@ -22,15 +22,15 @@ public class UserService {
         userRepository.save(userModel);
     }
 
-    public void joinGroup(UserGroupModel userGroupModel) {
-        userRepository.join(userGroupModel);
+    public void joinGroup(UserGroupModel userGroupModel, long user) {
+        userRepository.join(userGroupModel, user);
     }
 
     public boolean isUsed(String user) {
         return userRepository.isUsed(user) > 0;
     }
 
-    public void disjoinGroup(UserGroupModel userGroupModel) {
-        userRepository.disjoin(userGroupModel);
+    public void disjoinGroup(UserGroupModel userGroupModel, long user) {
+        userRepository.disjoin(userGroupModel, user);
     }
 }

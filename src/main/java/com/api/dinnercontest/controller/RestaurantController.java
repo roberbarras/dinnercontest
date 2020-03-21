@@ -33,10 +33,13 @@ public class RestaurantController {
     }
 
     @PostMapping("/restaurant")
-    public ResponseEntity<RestaurantModel> postRestaurant(@RequestBody RestaurantModel restaurantModel) {
+    public ResponseEntity<RestaurantModel> postRestaurant(
+            @RequestHeader(name = "user", required = false) Long user,
+            @RequestHeader(name = "token", required = false) String token,
+            @RequestBody RestaurantModel restaurantModel) {
         log.info("[REQUEST RECEIVED    -    POST    /restaurant    {}]", restaurantModel.getName());
-        if (loginService.checkIdToken(restaurantModel.getUserId(), restaurantModel.getToken())
-                && groupService.checkUserGroup(restaurantModel.getGroup(), restaurantModel.getUserId())) {
+        if (loginService.checkIdToken(user, token)
+                && groupService.checkUserGroup(restaurantModel.getGroup(), user)) {
             restaurantService.saveRestaurant(restaurantModel);
             return new ResponseEntity<>(restaurantModel, HttpStatus.CREATED);
         } else {

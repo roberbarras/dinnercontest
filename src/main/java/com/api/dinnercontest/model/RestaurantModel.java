@@ -2,7 +2,7 @@ package com.api.dinnercontest.model;
 
 import java.time.LocalDateTime;
 
-public class RestaurantModel extends UserIdTokenModel {
+public class RestaurantModel {
 
     private long restaurantId;
 

@@ -15,8 +15,8 @@ public class ScoreService {
         this.scoreRepository = scoreRepository;
     }
 
-    public void saveCategory(CategoryModel categoryModel) {
-        scoreRepository.saveCategory(categoryModel);
+    public void saveCategory(CategoryModel categoryModel, Long user) {
+        scoreRepository.saveCategory(categoryModel, user);
     }
 
     public CategoryModel getCategory(Long id) {

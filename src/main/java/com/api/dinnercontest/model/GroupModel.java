@@ -2,7 +2,7 @@ package com.api.dinnercontest.model;
 
 import java.time.LocalDateTime;
 
-public class GroupModel extends UserIdTokenModel {
+public class GroupModel {
 
     private Long groupId;
 

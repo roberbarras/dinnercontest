@@ -20,14 +20,14 @@ public class ScoreRepository {
 
     private static final Logger log = LoggerFactory.getLogger(LoginController.class);
 
-    public void saveCategory(CategoryModel categoryModel) {
+    public void saveCategory(CategoryModel categoryModel, Long user) {
         log.debug("Start saving category {}", categoryModel.getCategoryName());
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("group", categoryModel.getGroupId());
         parameters.addValue("name", categoryModel.getCategoryName());
         parameters.addValue("weighing", categoryModel.getWeighing());
-        parameters.addValue("user", categoryModel.getUserId());
+        parameters.addValue("user", user);
         parameters.addValue("date", LocalDateTime.now());
 
         String sql = "insert into categories (group_id, category_name, weighing, user_id, creation_date, removal_date) VALUES (:group, :name, :weighing, :user, :date, null)";

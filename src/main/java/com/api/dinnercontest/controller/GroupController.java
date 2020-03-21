@@ -49,9 +49,12 @@ public class GroupController {
     }
 
     @PostMapping("/group")
-    public ResponseEntity<GroupModel> postGroup(@RequestBody GroupModel groupModel) {
+    public ResponseEntity<GroupModel> postGroup(
+            @RequestHeader(name = "user", required = false) Long user,
+            @RequestHeader(name = "token", required = false) String token,
+            @RequestBody GroupModel groupModel) {
         log.info("[REQUEST RECEIVED    -    POST    /group    {}]", groupModel.getGroupName());
-        if (loginService.checkIdToken(groupModel.getUserId(), groupModel.getToken())) {
+        if (loginService.checkIdToken(user, token)) {
             groupService.save(groupModel);
             return new ResponseEntity<>(groupModel, HttpStatus.CREATED);
         } else {

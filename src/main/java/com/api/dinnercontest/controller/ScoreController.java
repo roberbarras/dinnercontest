@@ -29,10 +29,13 @@ public class ScoreController {
     }
 
     @PostMapping("/category")
-    public ResponseEntity<CategoryModel> postCategory(@RequestBody CategoryModel categoryModel) {
+    public ResponseEntity<CategoryModel> postCategory(
+            @RequestHeader(name = "user", required = false) Long user,
+            @RequestHeader(name = "token", required = false) String token,
+            @RequestBody CategoryModel categoryModel) {
         log.info("[REQUEST RECEIVED    -    POST    /category    {}]", categoryModel.getCategoryName());
-        if (loginService.checkIdToken(categoryModel.getUserId(), categoryModel.getToken())) {
-            scoreService.saveCategory(categoryModel);
+        if (loginService.checkIdToken(user, token)) {
+            scoreService.saveCategory(categoryModel, user);
             return new ResponseEntity<>(categoryModel, HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
