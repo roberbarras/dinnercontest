@@ -42,6 +42,20 @@ public class ScoreController {
         }
     }
 
+    @DeleteMapping("/category/{id}")
+    public ResponseEntity deleteCategory(
+            @RequestHeader(name = "user", required = false) Long user,
+            @RequestHeader(name = "token", required = false) String token,
+            @PathVariable(value = "id") Long id) {
+        log.info("[REQUEST RECEIVED    -    DELETE  /category    {}]", id);
+        if (loginService.checkIdToken(user, token)) {
+            scoreService.deleteCategory(id, user);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
+
     @GetMapping("/category/{id}")
     public ResponseEntity<CategoryModel> getCategory(@PathVariable(value = "id") Long id) {
         log.info("[REQUEST RECEIVED    -    GET     /cagetory/{}", id);

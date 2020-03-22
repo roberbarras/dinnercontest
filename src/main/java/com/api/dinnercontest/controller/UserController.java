@@ -42,7 +42,7 @@ public class UserController {
     @GetMapping("/user")
     public ResponseEntity<Boolean> isUsed(@RequestParam String name) {
         log.info("[REQUEST RECEIVED    -    GET     /user {}]", name);
-        return ResponseEntity.ok().body(userService.isUsed(name));
+        return ResponseEntity.ok(userService.isUsed(name));
     }
 
     @PostMapping("/user")

@@ -18,4 +18,12 @@ public class RestaurantService {
     public RestaurantModel getRestaurant(Long id) {
         return restaurantRepository.getRestaurant(id);
     }
+
+    public boolean checkUserRestaurant(Long restaurant, Long user) {
+        return restaurantRepository.checkUserRestaurant(restaurant, user);
+    }
+
+    public void deleteRestaurant(Long restaurant) {
+        restaurantRepository.deleteRestaurant(restaurant);
+    }
 }

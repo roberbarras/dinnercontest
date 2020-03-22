@@ -22,4 +22,8 @@ public class ScoreService {
     public CategoryModel getCategory(Long id) {
         return scoreRepository.getCategory(id);
     }
+
+    public void deleteCategory(Long id, Long user) {
+        scoreRepository.deleteCategory(id, user);
+    }
 }

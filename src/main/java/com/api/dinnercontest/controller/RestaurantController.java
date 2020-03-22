@@ -52,4 +52,19 @@ public class RestaurantController {
         log.info("[REQUEST RECEIVED    -    GET     /restaurant    {}]", id);
         return ResponseEntity.ok(restaurantService.getRestaurant(id));
     }
+
+    @DeleteMapping("/restaurant/{id}")
+    public ResponseEntity<RestaurantModel> deleteRestaurant(
+            @RequestHeader(name = "user", required = false) Long user,
+            @RequestHeader(name = "token", required = false) String token,
+            @PathVariable(value = "id") Long restaurant) {
+        log.info("[REQUEST RECEIVED    -    DELETE  /restaurant    {}]", restaurant);
+        if (loginService.checkIdToken(user, token)
+                && restaurantService.checkUserRestaurant(restaurant, user)) {
+            restaurantService.deleteRestaurant(restaurant);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
 }

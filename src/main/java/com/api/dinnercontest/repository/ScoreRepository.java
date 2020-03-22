@@ -61,4 +61,17 @@ public class ScoreRepository {
 
     }
 
+    public void deleteCategory(Long id, Long user) {
+        log.debug("Start deleting category {}", id);
+
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("id", id);
+        parameters.addValue("date", LocalDateTime.now());
+
+        String sql = "UPDATE categories SET removal_date = :date WHERE category_id = :id";
+
+        this.jdbcTemplate.update(sql, parameters);
+
+        log.debug("Category {} deleted", id);
+    }
 }

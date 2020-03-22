@@ -73,4 +73,34 @@ public class RestaurantRepository {
                 "where id_restaurant = :id";
         return jdbcTemplate.query(sql, parameters, mapper).get(0);
     }
+
+    public boolean checkUserRestaurant(Long restaurant, Long user) {
+
+        log.debug("Start checking Restaurant {} for user {}", restaurant, user);
+
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("restaurant", restaurant);
+        parameters.addValue("user", user);
+
+        String sql = "select count(*) from restaurants where id_restaurant = :restaurant and host = :user";
+
+        Integer results = this.jdbcTemplate.queryForObject(sql, parameters, Integer.class);
+
+        log.debug("results: {} ", results);
+
+        return results > 0;
+    }
+
+    public void deleteRestaurant(Long restaurant) {
+        log.debug("Start deleting restaurant {}", restaurant);
+
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("id", restaurant);
+
+        String sql = "UPDATE public.restaurants SET visible = false WHERE id_restaurant = :id";
+
+        this.jdbcTemplate.update(sql, parameters);
+
+        log.debug("Restaurant {} deleted", restaurant);
+    }
 }
