@@ -3,7 +3,8 @@ package com.api.dinnercontest.model;
 public class ScoreModel {
 
     private Long category;
-    private int score;
+    private int value;
+    private Long assessmentId;
 
     public ScoreModel() {
     }
@@ -16,19 +17,27 @@ public class ScoreModel {
         this.category = category;
     }
 
-    public int getScore() {
-        return score;
+    public int getValue() {
+        return value;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public Long getAssessmentId() {
+        return assessmentId;
+    }
+
+    public void setAssessmentId(Long assessmentId) {
+        this.assessmentId = assessmentId;
     }
 
     @Override
     public String toString() {
         return "ScoreModel{" +
                 "category=" + category +
-                ", score=" + score +
+                ", score=" + value +
                 '}';
     }
 }

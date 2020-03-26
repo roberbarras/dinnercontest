@@ -1,5 +1,6 @@
 package com.api.dinnercontest.controller;
 
+import com.api.dinnercontest.model.AssessmentModel;
 import com.api.dinnercontest.model.CategoryModel;
 import com.api.dinnercontest.service.LoginService;
 import com.api.dinnercontest.service.ScoreService;
@@ -60,5 +61,19 @@ public class ScoreController {
     public ResponseEntity<CategoryModel> getCategory(@PathVariable(value = "id") Long id) {
         log.info("[REQUEST RECEIVED    -    GET     /cagetory/{}", id);
         return ResponseEntity.ok(scoreService.getCategory(id));
+    }
+
+    @PostMapping("/assessment")
+    public ResponseEntity<AssessmentModel> postAssesment(
+            @RequestHeader(name = "user", required = false) Long user,
+            @RequestHeader(name = "token", required = false) String token,
+            @RequestBody AssessmentModel assessmentModel) {
+        log.info("[REQUEST RECEIVED    -    POST    /assessment   by user {}]", assessmentModel.getUser());
+        if (loginService.checkIdToken(user, token)) {
+            scoreService.saveAssessment(assessmentModel);
+            return new ResponseEntity<>(assessmentModel, HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
     }
 }

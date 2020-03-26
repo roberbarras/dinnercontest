@@ -77,23 +77,58 @@ create table restaurants
 		constraint restaurant_users_fk
 			references users,
 	id_group bigserial not null
-		constraint restaurant_group_fk
-			references groups,
-	date timestamp,
-	address varchar,
-	photo varchar,
-	visible boolean default true not null,
-	creation_date timestamp,
-	visible_date timestamp
+        constraint restaurant_group_fk
+            references groups,
+    date          timestamp,
+    address       varchar,
+    photo         varchar,
+    visible       boolean default true not null,
+    creation_date timestamp,
+    visible_date  timestamp
+);
+
+create table scores
+(
+    score_id   bigserial not null
+        constraint scores_pk
+            primary key,
+    assessment bigserial not null
+        constraint scores_assessment_fk
+            references assessments,
+    value      integer   not null,
+    category   bigserial not null
+        constraint scores_category_fk
+            references categories
+);
+
+alter table scores
+    owner to postgres;
+
+
+
+create table assessments
+(
+    assessment_id bigserial not null
+        constraint assessments_pk
+            primary key,
+    "user"        bigserial not null
+        constraint assessments_user_fk
+            references users,
+    restaurant    bigserial not null
+        constraint assessments_restaurant_fk
+            references restaurants,
+    total_score   real,
+    votes         smallint default 0,
+    creation_date timestamp
 );
 
 create table actions
 (
-	action_id bigserial not null
-		constraint actions_pk
-			primary key,
-	title varchar not null,
-	message varchar not null
+    action_id bigserial not null
+        constraint actions_pk
+            primary key,
+    title     varchar   not null,
+    message   varchar   not null
 );
 
 create table notification
@@ -111,15 +146,3 @@ create unique index group_group_name_uindex
 
 create unique index users_access_name_uindex
     on users (access_name);
-
-alter table users owner to postgres;
-
-alter table groups owner to postgres;
-
-alter table user_group owner to postgres;
-
-alter table tokens owner to postgres;
-
-alter table restaurant owner to postgres;
-
-alter table actions owner to postgres;

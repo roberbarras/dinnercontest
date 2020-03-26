@@ -1,13 +1,17 @@
 package com.api.dinnercontest.repository;
 
 import com.api.dinnercontest.controller.LoginController;
+import com.api.dinnercontest.model.AssessmentModel;
 import com.api.dinnercontest.model.CategoryModel;
+import com.api.dinnercontest.model.ScoreModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -30,7 +34,7 @@ public class ScoreRepository {
         parameters.addValue("user", user);
         parameters.addValue("date", LocalDateTime.now());
 
-        String sql = "insert into categories (group_id, category_name, weighing, user_id, creation_date, removal_date) VALUES (:group, :name, :weighing, :user, :date, null)";
+        String sql = "insert into categories (group_id, category_name, weighing, user_id, creation_date, removal_date) values (:group, :name, :weighing, :user, :date, null)";
 
         this.jdbcTemplate.update(sql, parameters);
 
@@ -73,5 +77,44 @@ public class ScoreRepository {
         this.jdbcTemplate.update(sql, parameters);
 
         log.debug("Category {} deleted", id);
+    }
+
+    public void saveAssessment(AssessmentModel assessmentModel) {
+        log.debug("Start saving assessment by user {}", assessmentModel.getUser());
+
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("restaurant", assessmentModel.getRestaurant());
+        parameters.addValue("user", assessmentModel.getUser());
+        parameters.addValue("date", LocalDateTime.now());
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        String sql = "insert into assessments (\"user\", restaurant, creation_date, total_score, votes) values (:user, :restaurant, :date, 0, 0)";
+
+        this.jdbcTemplate.update(sql, parameters, keyHolder);
+
+        Long assessmentId = (Long) keyHolder.getKeys().get("assessment_id");
+
+        for (ScoreModel score : assessmentModel.getAssessment()) {
+            score.setAssessmentId(assessmentId);
+            saveScore(score);
+        }
+
+        //TODO recalcular puntuación
+
+        log.debug("Category {} saved", keyHolder.getKeys().get("assessment_id"));
+    }
+
+    private void saveScore(ScoreModel scoreModel) {
+        log.debug("Start saving score: category {}, value {}", scoreModel.getCategory(), scoreModel.getValue());
+
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("assessment", scoreModel.getAssessmentId());
+        parameters.addValue("value", scoreModel.getValue());
+        parameters.addValue("category", scoreModel.getCategory());
+
+        String sql = "insert into scores (assessment, \"value\", category) values (:assessment, :value, :category)";
+
+        this.jdbcTemplate.update(sql, parameters);
     }
 }
