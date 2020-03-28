@@ -2,19 +2,19 @@ package com.api.dinnercontest.model;
 
 public class ScoreModel {
 
-    private Long category;
+    private Long categoryId;
     private int value;
     private Long assessmentId;
 
     public ScoreModel() {
     }
 
-    public Long getCategory() {
-        return category;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory(Long category) {
-        this.category = category;
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public int getValue() {
@@ -36,7 +36,7 @@ public class ScoreModel {
     @Override
     public String toString() {
         return "ScoreModel{" +
-                "category=" + category +
+                "category=" + categoryId +
                 ", score=" + value +
                 '}';
     }

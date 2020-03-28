@@ -72,7 +72,7 @@ public class ScoreRepository {
         parameters.addValue("id", id);
         parameters.addValue("date", LocalDateTime.now());
 
-        String sql = "UPDATE categories SET removal_date = :date WHERE category_id = :id";
+        String sql = "update categories set removal_date = :date where category_id = :id";
 
         this.jdbcTemplate.update(sql, parameters);
 
@@ -106,12 +106,12 @@ public class ScoreRepository {
     }
 
     private void saveScore(ScoreModel scoreModel) {
-        log.debug("Start saving score: category {}, value {}", scoreModel.getCategory(), scoreModel.getValue());
+        log.debug("Start saving score: category {}, value {}", scoreModel.getCategoryId(), scoreModel.getValue());
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("assessment", scoreModel.getAssessmentId());
         parameters.addValue("value", scoreModel.getValue());
-        parameters.addValue("category", scoreModel.getCategory());
+        parameters.addValue("category", scoreModel.getCategoryId());
 
         String sql = "insert into scores (assessment, \"value\", category) values (:assessment, :value, :category)";
 

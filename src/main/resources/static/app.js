@@ -17,8 +17,10 @@ function checkLogin() {
         const request = new XMLHttpRequest();
         request.open("POST", url + "/api/check-token");
         request.setRequestHeader("Content-Type", "application/json");
-        request.send(JSON.stringify(userToken));
-
+        request.setRequestHeader("user", localStorage.getItem("user"));
+        request.setRequestHeader("token", localStorage.getItem("token"));
+        //request.send(JSON.stringify(userToken));
+        request.send();
         request.onload = function () {
             if (request.status !== 200) {
                 location.href = "/login.html";

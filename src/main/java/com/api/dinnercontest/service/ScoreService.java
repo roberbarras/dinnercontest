@@ -1,19 +1,31 @@
 package com.api.dinnercontest.service;
 
+import com.api.dinnercontest.exception.IncorrectAssessmentData;
 import com.api.dinnercontest.model.AssessmentModel;
 import com.api.dinnercontest.model.CategoryModel;
+import com.api.dinnercontest.model.ScoreModel;
+import com.api.dinnercontest.repository.GroupRepository;
 import com.api.dinnercontest.repository.ScoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.Collections.frequency;
 
 @Service
 public class ScoreService {
 
     private final ScoreRepository scoreRepository;
 
+    private final GroupRepository groupRepository;
+
     @Autowired
-    public ScoreService(ScoreRepository scoreRepository) {
+    public ScoreService(ScoreRepository scoreRepository, GroupRepository groupRepository) {
         this.scoreRepository = scoreRepository;
+        this.groupRepository = groupRepository;
     }
 
     public void saveCategory(CategoryModel categoryModel, Long user) {
@@ -29,12 +41,29 @@ public class ScoreService {
     }
 
     public boolean checkAssessment(AssessmentModel assessmentModel) {
-        //TODO comprobar categorias ok (no repetidas, todas corresponden a ese grupo, no falta ninguna)
-        //TODO comprobar que el usuario es miembro del grupo
-        return true;
+        List<Long> categories = assessmentModel.getAssessment()
+                .stream().map(ScoreModel::getCategoryId)
+                .collect(Collectors.toList());
+        return checkDuplicates(categories)
+                && checkBelongGroup(categories, assessmentModel.getRestaurant());
     }
 
     public void saveAssessment(AssessmentModel assessmentModel) {
-        scoreRepository.saveAssessment(assessmentModel);
+        if (checkAssessment(assessmentModel)) {
+            scoreRepository.saveAssessment(assessmentModel);
+        } else {
+            throw new IncorrectAssessmentData();
+        }
+    }
+
+    private boolean checkBelongGroup(List<Long> categories, Long restaurant) {
+        List<Long> group = groupRepository.getIdCategories(groupRepository.getGroupOfRestaurant(restaurant));
+        return new HashSet<>(categories).equals(new HashSet<>(group));
+    }
+
+    private boolean checkDuplicates(List<Long> categories) {
+        return categories.stream()
+                .filter(i -> frequency(categories, i) > 1)
+                .distinct().count() == 0;
     }
 }

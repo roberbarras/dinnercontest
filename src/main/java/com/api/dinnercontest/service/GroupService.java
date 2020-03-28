@@ -40,4 +40,7 @@ public class GroupService {
     }
 
 
+    public List<GroupModel> getGroupUser(Long user) {
+        return groupRepository.getGroupUser(user);
+    }
 }

@@ -86,35 +86,20 @@ public class GroupRepository {
         RowMapper<UserModel> mapper = (rs, rowNum) -> {
             UserModel user = new UserModel();
             user.setUserName(rs.getString("user_name"));
-            user.setAccessName(rs.getString("access_name"));
+            user.setUserId(rs.getLong("user_id"));
+            user.setCreationDate(rs.getTimestamp("creation_date").toLocalDateTime());
+            user.setLastLogin(rs.getTimestamp("last_login").toLocalDateTime());
+            user.setEmail(rs.getString("email"));
             return user;
         };
 
-        String sql = "select user_name from users join user_group on user_id = \"user\" join groups on group_id = \"group\" where group_id = :id";
+        String sql = "select user_name, user_id, \"users\".creation_date, last_login, email from users join user_group on user_id = \"user\" join groups on group_id = \"group\" where group_id = :id";
         group = jdbcTemplate.query(sql, parameters, mapper);
 
         log.debug("Users found for group {}: {} ", id, group.toString());
 
         return group;
 
-    }
-
-    public List<Long> getIdCategories(Long group) {
-
-        log.debug("Start find id categories of group {}", group);
-
-        List<Long> categories;
-
-        MapSqlParameterSource parameters = new MapSqlParameterSource();
-        parameters.addValue("group", group);
-
-
-        String sql = "select id_category from group_category where id_group = :group";
-        categories = jdbcTemplate.queryForList(sql, parameters, Long.class);
-
-        log.debug("Categories found for group {}", group);
-
-        return categories;
     }
 
     public List<CategoryModel> getCategories(Long groupId) {
@@ -133,13 +118,25 @@ public class GroupRepository {
             return category;
         };
 
-        String sql = "select * from categories where group_id = :group and removal_date is null or removal_date > :date order by weighing desc;";
+        String sql = "select * from categories where group_id = :group and removal_date is null or removal_date > :date order by weighing desc";
 
         List<CategoryModel> categoryList = this.jdbcTemplate.query(sql, parameters, mapper);
 
         log.debug("Categories found: {} ", categoryList.size());
 
         return categoryList;
+    }
+
+    public List<Long> getIdCategories(Long group) {
+        log.debug("Start getting ids categories for group {}", group);
+
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("group", group);
+        parameters.addValue("date", LocalDateTime.now());
+
+        String sql = "select category_id from categories where group_id = :group and removal_date is null or removal_date > :date order by category_id asc";
+
+        return this.jdbcTemplate.queryForList(sql, parameters, Long.class);
     }
 
     public boolean checkUser(Long group, Long user) {
@@ -155,5 +152,38 @@ public class GroupRepository {
         log.debug("Categories found for group {}", group);
 
         return count > 0;
+    }
+
+    public List<GroupModel> getGroupUser(Long user) {
+        log.debug("Start getting groups for use {}", user);
+
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("user", user);
+
+        RowMapper<GroupModel> mapper = (rs, rowNum) -> {
+            GroupModel group = new GroupModel();
+            group.setGroupId(rs.getLong("group_id"));
+            group.setGroupName(rs.getString("group_name"));
+            group.setCreationDate(rs.getTimestamp("creation_date").toLocalDateTime());
+
+            return group;
+        };
+
+        String sql = "select group_id, group_name, groups.creation_date from user_group join groups on user_group.\"group\" = groups.group_id where \"user\" = :user";
+
+        List<GroupModel> groupModelList = this.jdbcTemplate.query(sql, parameters, mapper);
+
+        log.debug("Groups found: {} ", groupModelList.size());
+
+        return groupModelList;
+    }
+
+    public Long getGroupOfRestaurant(Long restaurant) {
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("restaurant", restaurant);
+
+        String sql = "select id_group from restaurants where id_restaurant = :restaurant";
+
+        return this.jdbcTemplate.queryForObject(sql, parameters, Long.class);
     }
 }
