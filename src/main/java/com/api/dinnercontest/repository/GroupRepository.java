@@ -40,10 +40,11 @@ public class GroupRepository {
         RowMapper<GroupModel> mapper = (rs, rowNum) -> {
             GroupModel group = new GroupModel();
             group.setGroupName(rs.getString("group_name"));
+            group.setCreationDate(rs.getTimestamp("creation_date").toLocalDateTime());
             return group;
         };
 
-        String sql = "select groups.group_name from groups where group_id = :id limit 1";
+        String sql = "select groups.group_name, groups.creation_date from groups where group_id = :id limit 1";
 
         GroupModel group = jdbcTemplate.query(sql, parameters, mapper).get(0);
 

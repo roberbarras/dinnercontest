@@ -74,8 +74,8 @@ public class GroupController {
         return ResponseEntity.ok(groupService.getCategories(group));
     }
 
-    @GetMapping("/group/{user}")
-    public ResponseEntity<List<GroupModel>> getGroupsOfUser(@PathVariable(value = "user") Long user) {
+    @GetMapping("/group")
+    public ResponseEntity<List<GroupModel>> getGroupsOfUser(@RequestParam(value = "user") Long user) {
         log.info("[REQUEST RECEIVED    -    GET     /group/user {}]", user);
         return ResponseEntity.ok(groupService.getGroupUser(user));
     }

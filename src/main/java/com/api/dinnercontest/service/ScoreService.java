@@ -1,6 +1,5 @@
 package com.api.dinnercontest.service;
 
-import com.api.dinnercontest.exception.IncorrectAssessmentData;
 import com.api.dinnercontest.model.AssessmentModel;
 import com.api.dinnercontest.model.CategoryModel;
 import com.api.dinnercontest.model.ScoreModel;
@@ -52,7 +51,7 @@ public class ScoreService {
         if (checkAssessment(assessmentModel)) {
             scoreRepository.saveAssessment(assessmentModel);
         } else {
-            throw new IncorrectAssessmentData();
+            throw new RuntimeException("Error en la valoración");
         }
     }
 

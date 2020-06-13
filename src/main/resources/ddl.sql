@@ -51,21 +51,27 @@ create table user_group
 
 create table categories
 (
-    category_id   bigserial not null
-        constraint category_pk
-            primary key,
-    group_id      bigserial not null
-        constraint group_category_groups_group_id_fk
-            references groups
-            on update cascade on delete cascade,
-    category_name varchar   not null,
-    weighing      integer   not null,
-    user_id       bigserial not null
-        constraint category_user_fk
-            references users,
-    creation_date timestamp,
-    removal_date  timestamp
+	category_id bigserial not null
+		constraint category_pk
+			primary key,
+	group_id bigserial not null
+		constraint group_category_groups_group_id_fk
+			references groups
+				on update cascade on delete cascade,
+	category_name varchar not null,
+	weighing integer not null,
+	user_id bigserial not null
+		constraint category_user_fk
+			references users,
+	creation_date timestamp,
+	removal_date timestamp,
+	constraint categories_unique
+		unique (group_id, category_name)
 );
+
+alter table categories owner to knkdqvtfbytfrb;
+
+
 
 create table restaurants
 (
@@ -87,25 +93,6 @@ create table restaurants
     visible_date  timestamp
 );
 
-create table scores
-(
-    score_id   bigserial not null
-        constraint scores_pk
-            primary key,
-    assessment bigserial not null
-        constraint scores_assessment_fk
-            references assessments,
-    value      integer   not null,
-    category   bigserial not null
-        constraint scores_category_fk
-            references categories
-);
-
-alter table scores
-    owner to postgres;
-
-
-
 create table assessments
 (
     assessment_id bigserial not null
@@ -120,6 +107,20 @@ create table assessments
     total_score   real,
     votes         smallint default 0,
     creation_date timestamp
+);
+
+create table scores
+(
+    score_id   bigserial not null
+        constraint scores_pk
+            primary key,
+    assessment bigserial not null
+        constraint scores_assessment_fk
+            references assessments,
+    value      integer   not null,
+    category   bigserial not null
+        constraint scores_category_fk
+            references categories
 );
 
 create table actions

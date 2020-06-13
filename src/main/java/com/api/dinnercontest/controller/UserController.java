@@ -4,6 +4,7 @@ import com.api.dinnercontest.model.UserGroupModel;
 import com.api.dinnercontest.model.UserModel;
 import com.api.dinnercontest.service.LoginService;
 import com.api.dinnercontest.service.UserService;
+import javassist.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +35,7 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<UserModel> getUser(HttpServletRequest request, @PathVariable(value = "id") Long id) {
+    public ResponseEntity<UserModel> getUser(HttpServletRequest request, @PathVariable(value = "id") Long id) throws NotFoundException {
         log.info("[REQUEST RECEIVED    -    GET     /user/{}]", id);
         return new ResponseEntity<>(userService.getUser(id), HttpStatus.OK);
     }

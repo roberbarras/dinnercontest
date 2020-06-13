@@ -2,19 +2,23 @@ package com.api.dinnercontest;
 
 import org.springframework.http.HttpStatus;
 
+import java.time.LocalDateTime;
+
 public class ApiError {
 
     private String timestamp;
-    private HttpStatus status;
+    private String code;
     private String message;
     private String path;
 
     public ApiError() {
     }
 
-    public ApiError(HttpStatus httpStatus, String message) {
-        status = httpStatus;
+    public ApiError(String code, String message, String path) {
+        this.timestamp = LocalDateTime.now().toString();
+        this.code = code;
         this.message = message;
+        this.path = path;
     }
 
     public String getTimestamp() {
@@ -23,14 +27,6 @@ public class ApiError {
 
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
-    }
-
-    public HttpStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(HttpStatus status) {
-        this.status = status;
     }
 
     public String getMessage() {
@@ -47,5 +43,13 @@ public class ApiError {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

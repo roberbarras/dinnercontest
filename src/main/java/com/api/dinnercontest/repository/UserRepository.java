@@ -3,6 +3,7 @@ package com.api.dinnercontest.repository;
 import com.api.dinnercontest.controller.LoginController;
 import com.api.dinnercontest.model.UserGroupModel;
 import com.api.dinnercontest.model.UserModel;
+import javassist.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,8 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Repository
@@ -37,7 +40,7 @@ public class UserRepository {
         return this.jdbcTemplate.queryForObject(sql, parameters, Long.class);
     }
 
-    public UserModel findById(Long id) {
+    public UserModel findById(Long id) throws NotFoundException {
 
         log.debug("Start find user for id {}", id);
 
@@ -60,11 +63,8 @@ public class UserRepository {
                 "from users u where u.user_id = :id " +
                 "limit 1";
 
-        UserModel user = this.jdbcTemplate.query(sql, parameters, mapper).get(0);
+        return jdbcTemplate.queryForObject(sql, parameters, mapper);
 
-        log.debug("User found: {} ", user.toString());
-
-        return user;
     }
 
     public void save(UserModel userModel) {

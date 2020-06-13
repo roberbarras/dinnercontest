@@ -3,6 +3,7 @@ package com.api.dinnercontest.service;
 import com.api.dinnercontest.model.UserGroupModel;
 import com.api.dinnercontest.model.UserModel;
 import com.api.dinnercontest.repository.UserRepository;
+import javassist.NotFoundException;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public UserModel getUser(Long id) {
+    public UserModel getUser(Long id) throws NotFoundException {
         return userRepository.findById(id);
     }
 
